@@ -10,7 +10,10 @@ const router = require('express').Router()
 //login
 
 router.post('/adminlogin', adminController.adminLogin);
+
 router.get('/checkAdmin', adminController.checkUser)
+
+
 // Dishes routers
 router.post('/addDish', dishesController.addDish)
 
@@ -30,9 +33,9 @@ router.get('/getAllCategory', categoryController.getAllCategory)
 
 router.post('/addCategory', categoryController.addCategory)
 
-router.post('/updateCategory/:category_id', categoryController.updateCategory)
+router.put('/updateCategory/:category_id', categoryController.updateCategory)
 
-router.post('/deleteCategory/:category_id', categoryController.deleteCategory)
+router.delete('/deleteCategory/:category_id', categoryController.deleteCategory)
 
 // get dishes by category
 router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCategory)
@@ -40,6 +43,7 @@ router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCate
 // Order Master Route 
 
 router.post('/addOrderMaster', orderMasterController.addOrderMaster);
+
 // Order Route 
 
 router.get('/getAllOrder', orderController.getAllOrder)

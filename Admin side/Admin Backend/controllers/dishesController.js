@@ -8,18 +8,18 @@ const path = require('path')
 // create main Model
 const Dishes = db.dishes
 
-
+const Category = db.category;
 // main work
 
 // 1. create dishes
 
 const addDish = async (req, res) => {
-
+    const category_id = await getCategoryByName(req.body.category_name);
     let info = {
         dish_images: req.body.dish_images,
         dish_name: req.body.dish_name,
         dish_price: req.body.dish_price,
-        category_id: req.body.category_id,
+        category_id: category_id,
         dish_description: req.body.dish_description,
     }
 
@@ -28,16 +28,33 @@ const addDish = async (req, res) => {
 
 }
 
+//get category id by name
+const getCategoryByName = async (category_name) => {
+
+    console.log(category_name);
+    const category = await Category.findOne({
+        where: { category_name: category_name }
+    });
+
+    return category.category_id
+};
+
 
 
 // 2. get all dishes
 
 const getAllDishes = async (req, res) => {
+    try {
+        const dishes = await Dishes.findAll({
+            include: [Category]
+        });
+        res.status(200).send(dishes);
+    } catch (error) {
+        console.error("Error fetching dishes:", error);
+        res.status(500).send("Internal server error");
+    }
+};
 
-    let dishes = await Dishes.findAll({})
-    res.status(200).send(dishes)
-
-}
 
 // 3. get single dish
 

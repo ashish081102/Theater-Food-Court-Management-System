@@ -12,7 +12,6 @@ const addCategory = async (req, res) => {
 
 
     let data = {
-        category_id: req.body.category_id,
         category_name: req.body.category_name,
         category_description: req.body.category_description
     }
