@@ -14,15 +14,17 @@ const Category = db.category;
 // 1. create dishes
 
 const addDish = async (req, res) => {
-    const category_id = await getCategoryByName(req.body.category_name);
+    // console.log(req)
+    const category_id = await getCategoryByName(req.body.category_id);
+
     let info = {
-        dish_images: req.body.dish_images,
+        dish_images: req.file.path,
         dish_name: req.body.dish_name,
         dish_price: req.body.dish_price,
         category_id: category_id,
         dish_description: req.body.dish_description,
     }
-
+    console.log(info);
     const dishes = await Dishes.create(info)
     res.status(200).send(dishes)
 

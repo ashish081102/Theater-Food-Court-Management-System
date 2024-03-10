@@ -6,9 +6,11 @@ import { useFormik } from "formik";
 import { addFoodModelSchema } from "./schemas/addFoodModelSchema";
 import toast from "react-hot-toast";
 import axios from "axios";
+
+import { Container, Form, Button } from "react-bootstrap";
 const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
   const [allCategory, setAllCategory] = useState([]);
-  const [selectedImage, setSelectedImage] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
   const addItemData = {
     itemName: "",
     itemPrice: "",
@@ -23,7 +25,6 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
       const response = await axios.get(
         "http://localhost:8080/api/admin/getAllCategory"
       );
-
       setAllCategory(response.data);
     };
 
@@ -32,13 +33,22 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
 
   const handleCreateDish = async (finalData) => {
     console.log(finalData);
-    const res = await axios.post("http://localhost:8080/api/admin/addDish", {
-      dish_name: finalData.dish_name,
-      dish_image: finalData.itemImage,
-      dish_price: finalData.dish_price,
-      category_id: finalData.category_name,
-      dish_description: finalData.dish_description,
-    });
+    const form = new FormData();
+    form.append("dish_name", finalData.dish_name);
+    form.append("dish_image", selectedImage);
+    form.append("dish_price", finalData.dish_price);
+    form.append("category_id", finalData.category_name);
+    form.append("dish_description", finalData.dish_description);
+    console.log(form);
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/api/admin/addDish",
+        form
+      );
+      console.log(res.data); // Log the response data if needed
+    } catch (error) {
+      console.error("Error adding dish:", error);
+    }
   };
   // addFoodItem("finalDataddd");
 
@@ -49,11 +59,12 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
       onSubmit: async (values, action) => {
         const finalData = {
           category_name: values.category_name,
-          dish_image: values.dish_name,
+          dish_image: selectedImage,
           dish_name: values.itemName,
           dish_price: values.itemPrice,
           dish_description: values.itemDescription,
         };
+        console.log(values.itemImage);
         addFoodItem(finalData);
         // console.log("fckkk", finalData);
         handleCreateDish(finalData);
@@ -62,8 +73,8 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
         action.resetForm();
       },
     });
-  function setImage(e) {
-    setSelectedImage(e.target.files[0]);
+  function setImage(event) {
+    setSelectedImage(event.target.files[0]);
   }
 
   return (
@@ -123,7 +134,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
               <label htmlFor="itemImage">Item Image</label>
               <div className="form-control itemImage">
                 <span>
-                  {values.itemImage == ""
+                  {selectedImage == null
                     ? "Select an Image"
                     : selectedImage.name}
                 </span>
@@ -134,7 +145,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
                 <input
                   type="file"
                   name="itemImage"
-                  value={values.dish_image}
+                  // value={values.itemImage}
                   onChange={setImage}
                   onBlur={handleBlur}
                   id="itemImage"
