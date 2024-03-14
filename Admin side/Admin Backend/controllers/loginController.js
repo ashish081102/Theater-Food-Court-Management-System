@@ -34,8 +34,9 @@ const adminLogin = async (req, res) => {
         }
 
         res.cookie("Token", userWithEmail.admin_email, {
-            expires: new Date(Date.now() + 8.64e+7),
+            maxAge: new Date(Date.now() + 8.64e+7),
             httpOnly: true,
+            signed:false
         })
 
         res.status(200).json({

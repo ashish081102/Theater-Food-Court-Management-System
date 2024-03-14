@@ -11,7 +11,7 @@ import Category from "./Pages/Category/Category";
 import OrderDetails from "./Pages/OrderDetails/OrderDetails";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./Pages/RootLayout/RootLayout";
-
+import Report from "./Pages/Report/index";
 function App() {
   const [userLogin, setUserLogin] = useState(false);
   const router = createBrowserRouter([
@@ -24,6 +24,7 @@ function App() {
         { path: "fooditem", element: <FoodItem /> },
         { path: "category", element: <Category /> },
         { path: "order-details", element: <OrderDetails /> },
+        { path: "report", element: <Report /> },
       ],
     },
     {

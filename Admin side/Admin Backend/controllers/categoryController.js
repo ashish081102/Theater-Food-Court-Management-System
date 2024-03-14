@@ -25,9 +25,16 @@ const addCategory = async (req, res) => {
 
 const getAllCategory = async (req, res) => {
 
-    const categories = await Category.findAll({})
-    res.status(200).send(categories)
+    // const categories = await Category.findAll({})
+    // res.status(200).send(categories)
 
+    try {
+        const categories = await Category.findAll({});
+        res.status(200).send(categories);
+    } catch (error) {
+        console.error("Error fetching category:", error);
+        res.status(500).send("Internal server error");
+    }
 }
 
 // 3. update category

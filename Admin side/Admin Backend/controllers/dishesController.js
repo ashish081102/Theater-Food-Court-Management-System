@@ -1,5 +1,5 @@
 const db = require('../models')
-
+// report 1 - jan - 2024, 29 - jan, 19 fab, 4 - march, 18 march
 // image Upload
 const multer = require('multer')
 const path = require('path')
@@ -14,11 +14,11 @@ const Category = db.category;
 // 1. create dishes
 
 const addDish = async (req, res) => {
-    // console.log(req)
-    const category_id = await getCategoryByName(req.body.category_id);
+    console.log(req.file)
+    const category_id = await getCategoryByName(req.body.category_name);
 
     let info = {
-        dish_images: req.file.path,
+        dish_image: `D:/food court app/Admin side/Admin Backend/ ${req.file.path}`,
         dish_name: req.body.dish_name,
         dish_price: req.body.dish_price,
         category_id: category_id,

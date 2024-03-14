@@ -33,17 +33,18 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
 
   const handleCreateDish = async (finalData) => {
     console.log(finalData);
-    const form = new FormData();
-    form.append("dish_name", finalData.dish_name);
-    form.append("dish_image", selectedImage);
-    form.append("dish_price", finalData.dish_price);
-    form.append("category_id", finalData.category_name);
-    form.append("dish_description", finalData.dish_description);
-    console.log(form);
+    const bodyformData = new FormData();
+    bodyformData.append("dish_name", finalData.dish_name);
+    bodyformData.append("image", selectedImage);
+    bodyformData.append("dish_price", finalData.dish_price);
+    bodyformData.append("category_name", finalData.category_name);
+    bodyformData.append("dish_description", finalData.dish_description);
+    console.log(bodyformData);
     try {
       const res = await axios.post(
         "http://localhost:8080/api/admin/addDish",
-        form
+        bodyformData,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log(res.data); // Log the response data if needed
     } catch (error) {
@@ -64,7 +65,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
           dish_price: values.itemPrice,
           dish_description: values.itemDescription,
         };
-        console.log(values.itemImage);
+        // console.log(values.itemImage);
         addFoodItem(finalData);
         // console.log("fckkk", finalData);
         handleCreateDish(finalData);

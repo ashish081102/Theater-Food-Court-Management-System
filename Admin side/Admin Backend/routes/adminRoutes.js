@@ -15,7 +15,7 @@ router.get('/checkAdmin', adminController.checkUser)
 
 
 // Dishes routers
-router.post('/addDish', dishesController.addDish)
+router.post('/addDish', dishesController.upload, dishesController.addDish)
 
 router.get('/allDishes', dishesController.getAllDishes)
 
@@ -50,7 +50,7 @@ router.get('/getAllOrder', orderController.getAllOrder)
 
 router.post('/addOrder', orderController.addOrder)
 
-router.get('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
+router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
 
 
 

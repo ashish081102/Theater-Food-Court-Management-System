@@ -43,7 +43,7 @@ const getSpecificDatesOrder = async (req, res) => {
     // let category_name = req.body.category_name;
     // let start = req.body.start;
     // let end = req.body.end;
-    let { category_name, start, end } = req.headers;
+    let { category_name, start, end } = req.body;
     console.log(start + " " + end);
     const result = await db.sequelize.query(`
         SELECT
@@ -66,52 +66,15 @@ const getSpecificDatesOrder = async (req, res) => {
         GROUP BY
             orders.ordermaster_id
     `, { type: db.sequelize.QueryTypes.SELECT });
-    // res.send(result);
-    // const result = await Order.findAll({
-    //     attributes: [
-    //         [db.sequelize.literal('category.category_name'), 'category_name'],
-    //         [db.sequelize.literal('dishes.dish_name'), 'dish_name'],
 
-    //         [db.sequelize.literal('orderMaster.order_date'), 'order_date'],
-
-    //         [db.sequelize.fn('COUNT', db.sequelize.literal('orders.order_id')), 'order_count'],
-    //     ],
-    //     include: [
-    //         {
-    //             model: db.dishes,
-    //             as: 'dishes',
-    //             attributes: [],
-    //             include: [
-    //                 {
-    //                     model: db.category,
-
-    //                     attributes: [],
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             model: db.orderMaster,
-    //             as: 'orderMaster',
-    //             attributes: [],
-    //         },
-
-    //     ],
-    //     where: {
-    //         '$orderMaster.order_date$': {
-    //             [Op.between]: [start, end],
-    //         },
-    //     },
-    //     group: ['orders.ordermaster_id'],
-    //     raw: true, // To get raw data
-    //     logging: console.log,
-    // });
-    console.log(result);
-
-    pdf.create(pdfTemplate(result, start, end, category_name), {}).toFile('result.pdf', (err) => {
+    pdf.create(pdfTemplate(result, start, end, category_name), {}).toFile(`${__dirname}/result.pdf`, (err) => {
         if (err) {
             res.send(err);
         }
-        res.send(result);
+
+        // console.log(__dirname + '/result.pdf')
+        res.sendFile(`${__dirname}/result.pdf`);
+
     });
 
 }

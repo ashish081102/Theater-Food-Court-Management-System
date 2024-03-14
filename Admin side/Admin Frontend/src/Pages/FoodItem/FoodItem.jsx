@@ -11,6 +11,7 @@ import Pagination from "../../Components/Pagination/Pagination";
 import EditFoodItemModel from "../../Components/EditFoodItemModal/EditFoodItemModal";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
 import toast from "react-hot-toast";
+import { getImageURL } from "../../utils/image-util";
 const FoodItem = () => {
   const [foodData, setFoodData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const FoodItem = () => {
   const [toBeDeleted, setToBeDeleted] = useState(null);
 
   const [searchText, setSearchText] = useState("");
-  
+
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
@@ -171,7 +172,9 @@ const FoodItem = () => {
                   return (
                     <tr key={item.dish_id}>
                       <td>
-                        <img src={item.dish_image} alt={item.dish_name} />
+                        <img
+                          src={`file:///D:/food court app/Admin side/Admin Backend/${item.dish_image}`}
+                        />
                       </td>
                       <td>{item.dish_name}</td>
                       <td>{item.category}</td>
