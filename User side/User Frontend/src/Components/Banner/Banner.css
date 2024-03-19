@@ -1,0 +1,38 @@
+.banner__main {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
+    url("https://davur.dexignzone.com/websitetemplate/xhtml/assets/images/banner/bnr1.jpg");
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.banner__title {
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 52px;
+  margin-bottom: 10px;
+}
+
+.banner__bredcrum ul {
+  display: flex;
+  list-style: none;
+  color: #fff;
+  gap: 10px;
+}
+
+.banner__bredcrum ul li {
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.banner__bredcrum ul li a {
+  color: #fff;
+  text-decoration: none;
+}

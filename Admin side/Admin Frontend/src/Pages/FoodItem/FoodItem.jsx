@@ -172,8 +172,10 @@ const FoodItem = () => {
                   return (
                     <tr key={item.dish_id}>
                       <td>
+                        {console.log("ITTTTTTTTTTTTTEM",item)}
                         <img
-                          src={`file:///D:/food court app/Admin side/Admin Backend/${item.dish_image}`}
+                          src={`${item.dish_image}`}
+                          alt="OK"
                         />
                       </td>
                       <td>{item.dish_name}</td>
