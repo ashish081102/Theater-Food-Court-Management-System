@@ -1,0 +1,106 @@
+[
+  {
+    "id": "A1",
+    "image": "https://davur.dexignzone.com/websitetemplate/xhtml/assets/images/about/pic5.jpg",
+    "title": "Pizza Margherita",
+    "description": "Pizza Margherita is a classic Italian pizza known for its simplicity and delicious flavors. It features a thin crust topped with tomato sauce, mozzarella cheese, and fresh basil, creating a harmonious blend of savory and herbal tastes that delight the palate.",
+    "rating": 4.5,
+    "price": 8.99
+  },
+  {
+    "id": "B2",
+    "image": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Veggie Burger",
+    "description": "A delicious vegetarian burger made with a patty of mixed vegetables, served with lettuce and tomato.",
+    "rating": 4.2,
+    "price": 6.99
+  },
+  {
+    "id": "C3",
+    "image": "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Chicken Biryani",
+    "rating": 4.7,
+    "description": "A flavorful Indian rice dish cooked with aromatic spices, tender chicken pieces, and fragrant basmati rice.",
+    "price": 9.99
+  },
+  {
+    "id": "E5",
+    "image": "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg",
+    "title": "Chocolate Cake",
+    "rating": 4.8,
+    "price": 5.99
+  },
+  {
+    "id": "H8",
+    "image": "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg",
+    "title": "Fried Chicken",
+    "rating": 4.3,
+    "description": "A delightful dessert consisting of scoops of ice cream topped with syrups, nuts, whipped cream, and cherries.",
+    "price": 9.49
+  },
+  {
+    "id": "I9",
+    "image": "https://images.pexels.com/photos/2097083/pexels-photo-2097083.jpeg",
+    "title": "Ice Cream Sundae",
+    "rating": 4.9,
+    "description": "A classic salad made with crisp romaine lettuce, Caesar dressing, croutons, and Parmesan cheese.",
+    "price": 6.99
+  },
+  {
+    "id": "J10",
+    "image": "https://images.pexels.com/photos/221143/pexels-photo-221143.jpeg",
+    "title": "Caesar Salad",
+    "rating": 4.7,
+    "description": "A refreshing bowl of blended fruits and yogurt, topped with granola, seeds, and fresh fruit slices.",
+    "price": 7.99
+  },
+  {
+    "id": "K11",
+    "image": "https://images.pexels.com/photos/1414650/pexels-photo-1414650.jpeg",
+    "title": "Smoothie Bowl",
+    "description": "A flavorful Indian rice dish cooked with aromatic spices and tender chicken pieces.",
+
+    "rating": 4.5,
+    "price": 5.49
+  },
+  {
+    "id": "N14",
+    "image": "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg",
+    "title": "Chicken Biryani",
+    "description": "A classic Italian pizza topped with tomato sauce, mozzarella cheese, and fresh basil leaves.",
+    "rating": 4.7,
+    "price": 9.99
+  },
+  {
+    "id": "O15",
+    "image": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+    "title": "Pizza Margherita",
+    "description": "A delicious vegetarian burger made with a patty of mixed vegetables, served with lettuce and tomato.",
+    "rating": 4.5,
+    "price": 8.99
+  },
+  {
+    "id": "P16",
+    "image": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+    "title": "Veggie Burger",
+    "rating": 4.2,
+    "description": "A creamy Italian pasta dish made with eggs, cheese, pancetta or bacon, and black pepper.",
+    "price": 6.99
+  },
+  {
+    "id": "Q17",
+    "image": "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg",
+    "title": "Pasta Carbonara",
+    "rating": 4.3,
+    "description": "A decadent dessert made with rich chocolate layers, topped with creamy frosting and chocolate shavings.",
+    "price": 7.99
+  },
+  {
+    "id": "R18",
+    "image": "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg",
+    "title": "Chocolate Cake",
+    "rating": 4.8,
+    "description": "A creamy Italian pasta dish made with eggs, cheese, pancetta or bacon, and black pepper.",
+    "price": 5.99
+  }
+]

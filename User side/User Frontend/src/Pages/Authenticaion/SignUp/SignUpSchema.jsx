@@ -6,8 +6,8 @@ export const SignUpSchema = Yup.object({
   username: Yup.string().min(4).required("Username is required."),
   phone_number: Yup.number()
     .typeError("That doesn't look like a phone number")
-    .positive("A phone number can't start with a minus")
-    .integer("A phone number can't include a decimal point")
+    .positive("Phone number can't start with a minus")
+    .integer("Phone number can't include a decimal point")
     .min(8)
     .required("A phone number is required"),
 });
