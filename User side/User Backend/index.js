@@ -18,13 +18,8 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // routers
-const router = require('./routes/adminRoutes')
-app.use('/api/admin', router)
-
-//static Images Folder
-
-const path = require('path')
-app.use('/Images', express.static('./Images'))
+const router = require('./routes/userRoutes.js')
+app.use('/api/user', router)
 
 
 const PORT = process.env.PORT

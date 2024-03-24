@@ -33,12 +33,8 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.category = require('./categoryModel.js')(sequelize, DataTypes)
-db.dishes = require('./dishesModel.js')(sequelize, DataTypes)
-db.admin = require('./adminModel.js')(sequelize, DataTypes)
 db.user = require('./userModel.js')(sequelize, DataTypes)
-db.orderMaster = require('./orderMasterModel')(sequelize, DataTypes)
-db.order = require('./orderModel')(sequelize, DataTypes)
+
 
 db.sequelize.sync({ force: false })
     .then(() => {

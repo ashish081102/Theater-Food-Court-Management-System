@@ -16,7 +16,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
     itemPrice: "",
     itemImage: "",
     category_name: "",
-    itemDescription: "",
+    itemDescription: "", 
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
         <form
           name="addItemForm"
           method="post"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit} 
           encType="multipart/form-data"
         >
           <div className="addItemForm">
@@ -172,7 +172,8 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
                   <option value="burgers">Burgers</option>
                   <option value="italian">Italian</option>
                   <option value="american">American</option>
-                  <option value="mexican">Mexican</option>*/}
+                <option value="mexican">Mexican</option>*/}
+                <option selected>Select Here</option>
                   {allCategory.map((category) => {
                     return (
                       <option value={category.category_name}>

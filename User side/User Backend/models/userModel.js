@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         user_mobile_no: {
             type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     })
     User.removeAttribute('id');
