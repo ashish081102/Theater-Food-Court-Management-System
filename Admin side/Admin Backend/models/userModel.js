@@ -1,3 +1,4 @@
+
 module.exports = (sequelize, DataTypes) => {
 
     const User = sequelize.define("user", {
@@ -18,6 +19,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        user_mobile: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        token: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     })
     User.removeAttribute('id');
     return User

@@ -174,8 +174,7 @@ const FoodItem = () => {
                       <td>
                         {console.log("ITTTTTTTTTTTTTEM",item)}
                         <img
-                          src={`${item.dish_image}`}
-                          alt="OK"
+                          src={`file:///D:/food court app/Admin side/Admin Backend/Images/${item.dish_image}`}
                         />
                       </td>
                       <td>{item.dish_name}</td>

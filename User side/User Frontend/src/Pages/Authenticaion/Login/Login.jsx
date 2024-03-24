@@ -2,15 +2,35 @@ import React from "react";
 import Banner from "../../../Components/Banner/Banner";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "../Authentication.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import {LoginSchema} from "./LoginSchema";
+import { LoginSchema } from "./LoginSchema";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
 
   const userData = {
     email: "",
     password: "",
+  };
+  const loginUser = async (user) => {
+    const userInfo = {
+      user_password: user.password,
+      user_email: user.email,
+    };
+    console.log(userInfo);
+    await axios
+      .post("http://localhost:8080/api/admin/userSignIn", userInfo, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -19,6 +39,7 @@ const Login = () => {
       validationSchema: LoginSchema,
       onSubmit: (values, action) => {
         console.log(values);
+        loginUser(values);
         action.resetForm();
       },
     });

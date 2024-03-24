@@ -3,20 +3,42 @@ import Banner from "../../../Components/Banner/Banner";
 import { useFormik } from "formik";
 import "../Authentication.css";
 import { SignUpSchema } from "./SignUpSchema";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
+  const navigate = useNavigate();
   const newUserData = {
     username: "",
     phone_number: "",
     email: "",
     password: "",
   };
-
+  const createUser = async (user) => {
+    const userInfo = {
+      user_name: user.username,
+      user_mobile: user.phone_number,
+      user_password: user.password,
+      user_email: user.email,
+    };
+    console.log(userInfo);
+    await axios
+      .post("http://localhost:8080/api/admin/userSignUp", userInfo, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: newUserData,
       validationSchema: SignUpSchema,
       onSubmit: (values, action) => {
-        console.log(values);
+        createUser(values);
         action.resetForm();
       },
     });

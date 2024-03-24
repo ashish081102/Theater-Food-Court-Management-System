@@ -4,6 +4,7 @@ const dishesController = require('../controllers/dishesController.js')
 const adminController = require('../controllers/loginController.js')
 const orderController = require('../controllers/orderController.js')
 const orderMasterController = require('../controllers/orderMasterController.js')
+const userController = require('../controllers/userRegistration.js')
 // router
 const router = require('express').Router()
 
@@ -53,6 +54,9 @@ router.post('/addOrder', orderController.addOrder)
 router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
 
 
+// User signup
 
+router.post('/userSignUp', userController.addUser);
+router.post('/userSignIn', userController.userLogin)
 
 module.exports = router
