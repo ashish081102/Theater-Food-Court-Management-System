@@ -7,7 +7,7 @@ const CartTable = () => {
   });
 
   return (
-    <table class="table check-tbl table-responsive-md">
+    <table className="table check-tbl table-responsive-md">
       <thead>
         <tr>
           <th>Dish</th>
@@ -20,16 +20,16 @@ const CartTable = () => {
       </thead>
       <tbody>
         <tr>
-          <td class="product-item-img">
+          <td className="product-item-img">
             <img src="assets/images/product/pic1.jpg" alt="" />
           </td>
-          <td class="product-item-name text-secondary">Cheese Burger</td>
-          <td class="product-item-price">$35.00</td>
-          <td class="product-item-quantity">
-            <div class="quantity btn-quantity style-1 me-3">
-              <div class="input-group bootstrap-touchspin">
+          <td className="product-item-name text-secondary">Cheese Burger</td>
+          <td className="product-item-price">$35.00</td>
+          <td className="product-item-quantity">
+            <div className="quantity btn-quantity style-1 me-3">
+              <div className="input-group bootstrap-touchspin">
                 <span
-                  class="input-group-addon bootstrap-touchspin-prefix"
+                  className="input-group-addon bootstrap-touchspin-prefix"
                   style={{ display: "none" }}
                 ></span>
                 <input
@@ -37,33 +37,33 @@ const CartTable = () => {
                   type="text"
                   value="1"
                   name="demo_vertical2"
-                  class="form-control"
+                  className="form-control"
                   style={{ display: "block" }}
                 />
                 <span
-                  class="input-group-addon bootstrap-touchspin-postfix"
+                  className="input-group-addon bootstrap-touchspin-postfix"
                   style={{ display: "none" }}
                 ></span>
-                <span class="input-group-btn-vertical">
+                <span className="input-group-btn-vertical">
                   <button
-                    class="btn btn-default bootstrap-touchspin-up"
+                    className="btn btn-default bootstrap-touchspin-up"
                     type="button"
                   >
-                    <i class="fa fa-plus"></i>
+                    <i className="fa fa-plus"></i>
                   </button>
                   <button
-                    class="btn btn-default bootstrap-touchspin-down"
+                    className="btn btn-default bootstrap-touchspin-down"
                     type="button"
                   >
-                    <i class="fa fa-minus-square"></i>
+                    <i className="fa fa-minus-square"></i>
                   </button>
                 </span>
               </div>
             </div>
           </td>
-          <td class="product-item-totle">$28.00</td>
-          <td class="product-item-close">
-            <a href="javascript:void(0);" class="fa fa-close"></a>
+          <td className="product-item-totle">$28.00</td>
+          <td className="product-item-close">
+            <a href="javascript:void(0);" className="fa fa-close"></a>
           </td>
         </tr>
       </tbody>

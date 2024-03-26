@@ -1,19 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header class="site-header mo-left header ">
-      <div class="sticky-header main-bar-wraper navbar-expand-lg">
-        <div class="main-bar clearfix ">
-          <div class="container clearfix">
-            <div class="logo-header logo-dark">
+    <header className="site-header mo-left header ">
+      <div className="sticky-header main-bar-wraper navbar-expand-lg">
+        <div className="main-bar clearfix ">
+          <div className="container clearfix">
+            <div className="logo-header logo-dark">
               <a href="index.html">
                 <img src="assets/images/logo.png" alt="" />
               </a>
             </div>
 
             <button
-              class="navbar-toggler collapsed navicon justify-content-end"
+              className="navbar-toggler collapsed navicon justify-content-end"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNavDropdown"
@@ -26,67 +27,63 @@ const Header = () => {
               <span></span>
             </button>
 
-            <div class="extra-nav">
-              <div class="extra-cell">
-                <h6 class="phone">
+            <div className="extra-nav">
+              <div className="extra-cell">
+                <h6 className="phone">
                   <span>
-                    <i class="fa-solid fa-phone"></i>
+                    <i className="fa-solid fa-phone"></i>
                   </span>
-                  (+91) 987 654 3210
+                  (+91) 9974130474
                 </h6>
-                <a class="btn btn-primary btn-lg" href="contact-us.html">
+                <a className="btn btn-primary btn-lg" href="contact-us.html">
                   Cantact US
                 </a>
               </div>
             </div>
 
             <div
-              class="header-nav navbar-collapse collapse "
+              className="header-nav navbar-collapse collapse "
               id="navbarNavDropdown"
             >
-              <div class="logo-header">
-                <a href="index.html" class="logo-dark">
+              <div className="logo-header">
+                <a href="index.html" className="logo-dark">
                   <img src="assets/images/logo.png" alt="" />
                 </a>
               </div>
-              <ul class="nav navbar-nav navbar navbar-left show">
+              <ul className="nav navbar-nav navbar navbar-left show">
                 <li>
-                  <a href="index.html">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="about-us.html">About Us</a>
+                  <Link>About Us </Link>
                 </li>
-                <li class="sub-menu-down active">
+                <li className="sub-menu-down active">
+                {/* <Link to="/shop"/>Shop</Link> */}
                   <a href="javascript:void(0);">Shop</a>
-                  <ul class="sub-menu show">
+                  <ul className="sub-menu show">
                     <li>
-                      <a href="shop-grid-view.html">Shop Grid</a>
+                    <Link to="/shop">Shop Grid</Link>
+                    </li> 
+                    <li>
+                    <Link to="/cart-detail">Shop Cart </Link>
                     </li>
                     <li>
-                      <a href="shop-detail.html">Shop Detail</a>
+                      <a href="#">Shop Checkout</a>
+                    </li>
+                    <li className="active">
+                    <Link to="/wishlist">Wishlist </Link>
                     </li>
                     <li>
-                      <a href="shop-cart.html">Shop Cart</a>
+                    <Link to="/login">Login</Link>
                     </li>
                     <li>
-                      <a href="shop-checkout.html">Shop Checkout</a>
-                    </li>
-                    <li class="active">
-                      <a href="wishlist.html" class="active">
-                        Wishlist
-                      </a>
-                    </li>
-                    <li>
-                      <a href="shop-login.html">Login</a>
-                    </li>
-                    <li>
-                      <a href="shop-registration.html">Registration</a>
+                    <Link to="/sign-up">Registration</Link>
                     </li>
                   </ul>
                 </li>
-                <li class="sub-menu-down">
+                <li className="sub-menu-down">
                   <a href="javascript:void(0);">Blog</a>
-                  <ul class="sub-menu">
+                  <ul className="sub-menu">
                     <li>
                       <a href="blog-list.html">Blog List</a>
                     </li>

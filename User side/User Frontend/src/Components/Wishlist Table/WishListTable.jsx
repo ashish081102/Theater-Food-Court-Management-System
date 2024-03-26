@@ -5,7 +5,7 @@ const WishListTable = () => {
   useEffect(() => {});
 
   return (
-    <table class="table check-tbl table-responsive-md">
+    <table className="table check-tbl table-responsive-md">
       <thead>
         <tr>
           <th>Dish</th>
@@ -16,13 +16,13 @@ const WishListTable = () => {
       </thead>
       <tbody>
         <tr>
-          <td class="product-item-img">
+          <td className="product-item-img">
             <img src="assets/images/product/pic1.jpg" alt="" />
           </td>
-          <td class="product-item-name text-secondary">Cheese Burger</td>
-          <td class="product-item-price">$35.00</td>
-          <td class="product-item-close">
-            <a href="javascript:void(0);" class="fa fa-close"></a>
+          <td className="product-item-name text-secondary">Cheese Burger</td>
+          <td className="product-item-price">$35.00</td>
+          <td className="product-item-close">
+            <a href="javascript:void(0);" className="fa fa-close"></a>
           </td>
         </tr>
       </tbody>
