@@ -8,20 +8,7 @@ import "./bootstrap-select.min.css";
 import CartTable from "../../Components/Table/CartTable";
 const Cart = () => {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState();
-  useEffect(() => {
-    async function getCartDetail() {
-      await axios
-        .get("")
-        .then((res) => {
-          setCartItems(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    getCartDetail();
-  });
+ 
   return (
     <>
       <Banner title={"Cart"} path={"Cart Detail"} />
@@ -32,7 +19,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-12 m-b30">
                   <div className="table-responsive">
-                    <CartTable cartData={cartItems} />
+                    <CartTable />
                   </div>
                 </div>
               </div>

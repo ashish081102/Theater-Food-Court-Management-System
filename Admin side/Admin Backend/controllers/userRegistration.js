@@ -26,11 +26,10 @@ const addUser = async (req, res) => {
             }
             data['token'] = createToken(data.user_email);
 
-            // res.cookie("tokenVal", data.token, {
-            //     expires: new Date(Date.now() + 900000), httpOnly: true, sameSite: "none",
-            //     secure: true
-            // })
-            
+            res.cookie("tokenVal", data.token, {
+                expires: new Date(Date.now() + 900000), httpOnly: true
+            })
+
             const addUser = await User.create(data)
             console.log(addUser);
             res.status(200).send(addUser)
