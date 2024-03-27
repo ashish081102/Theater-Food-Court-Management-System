@@ -1,4 +1,4 @@
-.login__container { 
+.login__container {
   padding-top: 70px;
   padding-bottom: 40px;
   display: flex;
@@ -6,10 +6,13 @@
   padding-left: 100px;
   padding-right: 100px;
   gap: 20px;
+  height: 550px;
+  overflow: hidden;
 }
 
 .login__left,
-.login__right {
+.login__right,
+.forgot_password_container {
   flex: 1;
   padding: 30px;
   background-color: #f9f9f9;
@@ -19,32 +22,37 @@
   font-weight: 700;
   margin: 0px 0px 8px;
 }
-.login__right > h2,.signup__input__form h2 {
+.login__right > h2,
+.signup__input__form h2 {
   font-weight: 700;
   margin: 0px 0px 5px;
 }
 
 .login__right > p,
-.login__left > p ,.signup__input__form p{
+.login__left > p,
+.signup__input__form p {
   color: #7a81a6;
 }
 
-
-.signup__input__form p.temp-data{
+.signup__input__form p.temp-data {
   margin-top: 20px;
 }
 
-.signup__input__form p span{
-  color:#2f4cdd;
+.signup__input__form p span {
+  color: #2f4cdd;
 }
 
-.login__right__input {
+.login__right__input{
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex:1;
 }
 
-.login__right__input__control,.signup__input__form__control {
+.login__right__input__control,
+.signup__input__form__control,
+.forgot__password__input__control
+{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -52,13 +60,17 @@
   margin-top: 10px;
 }
 
-.login__right__input__control label ,.signup__input__form__control label{
+.login__right__input__control label,
+.signup__input__form__control label,
+.forgot__password__input__control label {
   font-weight: 600;
   color: #18214f;
   font-size: 14px;
 }
 
-.login__right__input__control input ,.signup__input__form__control input{
+.login__right__input__control input,
+.signup__input__form__control input,
+.forgot__password__input__control input {
   height: 60px;
   font-size: 16px;
   font-weight: 400;
@@ -68,7 +80,7 @@
   border-radius: 6px !important;
   border: 0;
   border: 1px solid #dddddd;
-  padding: 10px 20px; 
+  padding: 10px 20px;
 }
 
 .login__right__button {
@@ -86,7 +98,7 @@
   border-radius: 6px;
   border: 1px solid #2f4cdd;
   background-color: #2f4cdd;
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
 }
@@ -98,10 +110,13 @@
   cursor: pointer;
 }
 
-
-
 .login__left > button {
   margin-top: 20px;
+  color: #ffffff;
+}
+
+.login__right__button > button {
+  color: #ffffff;
 }
 
 .form-error {
@@ -110,23 +125,36 @@
 
 /* ======================SIGN UP CSS STARTS=============================== */
 
-.signup__container { 
+.signup__container {
   display: flex;
   justify-content: center;
 }
 
-.signup__input__container{
+.signup__input__container {
   background-color: #eee;
-  padding: 30px; 
+  padding: 30px;
   border-radius: 6px;
   max-width: 540px;
 }
 
-.signup__container{
+.signup__container {
   padding: 40px 0px 10px;
 }
 
-.signup__input__form button{
+.signup__input__form button {
   margin-top: 20px;
   width: 100%;
+  color: #ffffff;
+}
+
+
+/* Forgot Password */
+.forgot__password__input__control div{
+  display: flex;
+  flex-direction: row;
+}
+
+.forgot__password__input__control--input {
+  display: flex;
+  flex-direction: column;
 }

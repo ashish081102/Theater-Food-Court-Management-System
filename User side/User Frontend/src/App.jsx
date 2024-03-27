@@ -3,7 +3,10 @@ import "./App.css";
 import RootLayout from "./Pages/RootLayout";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Authenticaion/Login/Login";
+
 import Signup from "./Pages/Authenticaion/SignUp/Signup";
+
+// import Signup from "./Pages/Authenticaion/SignUp/Signup";
 
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 
@@ -17,6 +20,9 @@ import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 
 import Cart from "./Pages/Cart/Cart";
 import Wishlist from "./Pages/WishList/WishList";
+
+// import Cart from "./Pages/Cart/Cart";
+// import Wishlist from "./Pages/WishList/WishList";
 
 function App() {
   const router = createBrowserRouter([

@@ -11,13 +11,13 @@ const WishList = () => {
   return (
     <>
       <Banner title={"WishList"} path={"Wish List"} />
-      <div class="page-wraper">
-        <div class="page-content">
-          <div class="content-inner">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12 m-b30">
-                  <div class="table-responsive">
+      <div className="page-wraper">
+        <div className="page-content">
+          <div className="content-inner">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-12 m-b30">
+                  <div className="table-responsive">
                     <WishListTable />
                   </div>
                 </div>

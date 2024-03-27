@@ -5,15 +5,13 @@ const jwt = require("jsonwebtoken");
 
 const User = db.user
 
-
-
 // functions
 
 //1. Add user
 
 const addUser = async (req, res) => {
     const isPresent = await checkUser(req.body.user_email);
-    // const [authToken, setAuthToken] = useState(() => localStorage.getItem('user_authtoken') || null);
+
     if (isPresent == false) {
 
         try {
@@ -27,8 +25,12 @@ const addUser = async (req, res) => {
             data['token'] = createToken(data.user_email);
 
             res.cookie("tokenVal", data.token, {
+
                 expires: new Date(Date.now() + 900000), httpOnly: true
             })
+
+
+
 
             const addUser = await User.create(data)
             console.log(addUser);
@@ -61,7 +63,6 @@ const checkUser = async (email) => {
 const userLogin = async (req, res) => {
     try {
         const { user_email, user_password } = req.body;
-        // console.log(admin_email);
         const userWithEmail = await User.findOne({
             where: {
                 user_email: user_email

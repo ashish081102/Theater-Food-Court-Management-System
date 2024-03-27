@@ -6,6 +6,7 @@ import SingleProduct from "../../Components/SingleProduct/SingleProduct";
 import Header from "../../Components/Header/Header";
 import Pagination from "../../Components/Pagination/Pagination";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
+import { IoSearch } from "react-icons/io5";
 import axios from "axios";
 import { Link } from "react-router-dom";
 const Shop = () => {
@@ -16,6 +17,7 @@ const Shop = () => {
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const [searchText, setSearchText] = useState("");
 
   const [filterData, setFilterData] = useState(shopData);
 
@@ -50,6 +52,15 @@ const Shop = () => {
     fetch();
   }, []);
 
+  const searchFilter = () => {
+    setFilterData(
+      shopData.filter((data) =>
+        data.title.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+    setCurrentPage(1);
+  };
+
   const paginate = (pagenumber) => {
     if (
       pagenumber >= 1 &&
@@ -75,6 +86,23 @@ const Shop = () => {
       <Banner title="Shop Page" path="Shop" />
 
       <div className="shop__container">
+        <div className="shop__container--search">
+          <input
+            type="text"
+            value={searchText}
+            placeholder="Search "
+            onChange={(e) => {
+              setSearchText(e.target.value);
+
+              if (e.target.value == "") {
+                setFilterData(shopData);
+              }
+            }}
+          />
+          <button onClick={searchFilter}>
+            <IoSearch />
+          </button>
+        </div>
         <div className="shop__container--data">
           {currentPosts.map((data, index) => {
             return (
