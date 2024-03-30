@@ -1,10 +1,10 @@
-const db = require('../models')
+const db = require('../models');
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/serverConfig");
 
 // model
-const Admin = db.admin
+const Admin = db.admin;
 
 // functions
 
@@ -34,10 +34,9 @@ const adminLogin = async (req, res) => {
         }
 
         res.cookie("Token", userWithEmail.admin_email, {
-            maxAge: new Date(Date.now() + 8.64e+7),
-            httpOnly: true,
-            signed:false
-        })
+            maxAge: new Date(Date.now() + (24 * 60 * 60 * 1000)),
+            httpOnly: true
+        });
 
         res.status(200).json({
 
@@ -48,19 +47,19 @@ const adminLogin = async (req, res) => {
         console.log(error);
         res.status(400).send("invalid login details");
     }
-}
+};
 
 const checkUser = async (req, res) => {
     console.log(req.cookies.Token);
     if (req.cookies.Token == process.env.SECRET_KEY) {
-        return res.status(200).json({ valid: true })
+        return res.status(200).json({ valid: true });
     } else {
-        return res.status(404).json({ valid: false })
+        return res.status(404).json({ valid: false });
     }
 
-}
+};
 
 module.exports = {
     adminLogin,
     checkUser
-}
+};

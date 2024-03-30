@@ -7,8 +7,26 @@ import "./animate.css";
 import "./bootstrap-select.min.css";
 import CartTable from "../../Components/Table/CartTable";
 const Cart = () => {
-  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState();
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  console.log("From local     ", user_id);
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+          console.log("Succcseee");
+        }).catch((err) => {
+          navigate('/login');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
   useEffect(() => {
     async function getCartDetail() {
       await axios
