@@ -24,8 +24,7 @@ const ProductDetail = () => {
       </button>
     </>
   ) : (
-    <div className="product__details">
-      <Header />
+    <div className="product__details"> 
       <Banner title={"Product Detail"} path={"Product Detail"} />
 
       <div className="product__details__row">

@@ -1,34 +1,49 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../Pages/Authenticaion/Authentication.css";
 import { useFormik } from "formik";
 import "./ForgotPassword.css";
 import { ForgotPasswordSchema } from "./ForgotPasswordSchema";
+import { IoCloudDoneSharp } from "react-icons/io5";
 import { IoCloudDone } from "react-icons/io5";
+import axios from "axios";
 const ForgotPasword = ({ setForgotPassword }) => {
-  const [sentOtp, setSentOtp] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+
+  const submitRef = useRef();
 
   const userData = {
     email: "",
-    otp: null,
   };
-
-  const emailRef = useRef();
-  const sendOtpBtnRef = useRef();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: userData,
       validationSchema: ForgotPasswordSchema,
-      onSubmit: (values, action) => {
+      onSubmit: async (values, action) => {
         console.log(values);
 
-        //enabling the email and send OTP button after submiting
-        emailRef.current.removeAttribute("disabled", "");
-        sendOtpBtnRef.current.removeAttribute("disabled", "");
+        const res = await axios.post(
+          "http://localhost:8080/api/admin/forgot-password",
+          values
+        );
+
+        console.log(res);
+
+        if (res.status == 200) {
+          setEmailSent(true);
+          submitRef.current.innerText = `Email Sent`;
+        }
 
         action.resetForm();
       },
     });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setEmailSent(false);
+      clearTimeout(timeout);
+    }, 3000);
+  }, [emailSent]);
 
   return (
     <form className="forgot_password_container" onSubmit={handleSubmit}>
@@ -46,7 +61,6 @@ const ForgotPasword = ({ setForgotPassword }) => {
             }}
           >
             <input
-              ref={emailRef}
               type="email"
               name="email"
               id="email"
@@ -59,74 +73,23 @@ const ForgotPasword = ({ setForgotPassword }) => {
               <p className="form-error">{errors.email}</p>
             ) : null}
           </div>
-
-          {((!errors.email && touched.email) || sentOtp) && (
-            <button
-              ref={sendOtpBtnRef}
-              onClick={(e) => {
-                e.currentTarget.disabled = true;
-
-                // e.currentTarget.previousElementSibling.children[0].setAttribute(
-                //   "disabled",
-                //   "true"
-                // );
-
-                emailRef.current.setAttribute("disabled", "");
-
-                setSentOtp(true);
-              }}
-            >
-              {sentOtp ? (
-                <>
-                  <IoCloudDone /> <span>OTP SENT</span>
-                </>
-              ) : (
-                "Send OTP"
-              )}
-            </button>
-          )}
         </div>
+
+        <div className="forgot__password__input__control--button">
+          <button ref={submitRef}>
+            Send E-mail {emailSent && <IoCloudDone />}
+          </button>
+        </div>
+        {emailSent && (
+          <p
+            style={{
+              margin: "0px auto",
+            }}
+          >
+            Email has been Sent! Please Check Your Email
+          </p>
+        )}
       </div>
-
-      {sentOtp && (
-        <div className="forgot__password__input__control">
-          <label htmlFor="otp">
-            OTP <sup>*</sup>
-          </label>
-          <input
-            type="otp"
-            name="otp"
-            id="otp"
-            value={values.otp}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="Enter OTP"
-          />
-          {errors.otp && touched.otp ? (
-            <p className="form-error">{errors.otp}</p>
-          ) : null}
-          <div className="validate__forgot">
-            {!errors.otp && touched.otp && (
-              <>
-                <input
-                  type="button"
-                  onClick={() => {
-                    setForgotPassword(false);
-                  }}
-                  className="vf__back__btn"
-                  value={"Back"}
-                />
-                {/* <input
-                  type="button"
-                  className="vf__submit__btn"
-                  value={"Submit"}
-                /> */}
-                <button>Submit</button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </form>
   );
 };

@@ -49,16 +49,17 @@ function App() {
           path: "/wishlist",
           element: <Wishlist />,
         },
+        {
+          path: "/shop",
+          element: <Shop />,
+        },
+        {
+          path: "/product/:productId",
+          element: <ProductDetail />,
+        },
       ],
     },
-    {
-      path: "/shop",
-      element: <Shop />,
-    },
-    {
-      path: "/product/:productId",
-      element: <ProductDetail />,
-    },
+   
   ]);
 
   return <RouterProvider router={router} />;
