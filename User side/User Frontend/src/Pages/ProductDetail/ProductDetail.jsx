@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProductDetail.css";
 import { useNavigate, useParams } from "react-router-dom";
 import SHOP_DATA from "../../data/FoodList.json";
@@ -7,8 +7,27 @@ import Header from "../../Components/Header/Header";
 import { FaCartShopping } from "react-icons/fa6";
 
 const ProductDetail = () => {
-  const param = useParams();
+ 
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  console.log("From local     ", user_id);
   const navigate = useNavigate();
+  useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id.user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+          console.log("Succcseee");
+        }).catch((err) => {
+          navigate('/login');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
+  const param = useParams();
   const productId = param.productId;
   const currentData = SHOP_DATA.find((data) => data.id == productId);
 
@@ -24,8 +43,7 @@ const ProductDetail = () => {
       </button>
     </>
   ) : (
-    <div className="product__details">
-      <Header />
+    <div className="product__details"> 
       <Banner title={"Product Detail"} path={"Product Detail"} />
 
       <div className="product__details__row">

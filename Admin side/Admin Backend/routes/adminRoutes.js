@@ -1,58 +1,149 @@
 // import controllers review, products
-const categoryController = require('../controllers/categoryController.js')
-const dishesController = require('../controllers/dishesController.js')
-const adminController = require('../controllers/loginController.js')
-const orderController = require('../controllers/orderController.js')
-const orderMasterController = require('../controllers/orderMasterController.js')
+const categoryController = require("../controllers/categoryController.js");
+const dishesController = require("../controllers/dishesController.js");
+const adminController = require("../controllers/loginController.js");
+const orderController = require("../controllers/orderController.js");
+const orderMasterController = require("../controllers/orderMasterController.js");
+const userController = require("../controllers/userRegistration.js");
+const userCartController = require("../controllers/userCart.js");
+const userWishlistController = require("../controllers/wishlistController.js");
+
+const userPasswordRecovery = require("../controllers/userPasswordRecovery.js");
+
 // router
-const router = require('express').Router()
+<<<<<<< HEAD
+const router = require("express").Router();
+
+//login
+
+router.post("/adminlogin", adminController.adminLogin);
+=======
+
+const router = require('express').Router();
 
 //login
 
 router.post('/adminlogin', adminController.adminLogin);
 
-router.get('/checkAdmin', adminController.checkUser)
+router.get('/checkAdmin', adminController.checkUser);
+>>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
 
+router.get("/checkAdmin", adminController.checkUser);
 
 // Dishes routers
-router.post('/addDish', dishesController.upload, dishesController.addDish)
+<<<<<<< HEAD
+router.post("/addDish", dishesController.upload, dishesController.addDish);
 
-router.get('/allDishes', dishesController.getAllDishes)
+router.get("/allDishes", dishesController.getAllDishes);
 
-router.get('/Dishes/:id', dishesController.getOneDish)
+router.get("/Dishes/:id", dishesController.getOneDish);
+=======
+router.post('/addDish', dishesController.upload, dishesController.addDish);
 
-router.put('/Dishes/:id', dishesController.updateDishes)
+router.get('/allDishes', dishesController.getAllDishes);
 
-router.delete('/Dishes/:id', dishesController.deleteDish)
+router.get('/Dishes/:id', dishesController.getOneDish);
 
+router.put('/Dishes/:id', dishesController.updateDishes);
 
+router.delete('/Dishes/:id', dishesController.deleteDish);
+>>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
+
+router.put("/Dishes/:id", dishesController.updateDishes);
+
+router.delete("/Dishes/:id", dishesController.deleteDish);
 
 // Category Url and Controller
 
-router.get('/getAllCategory', categoryController.getAllCategory)
+<<<<<<< HEAD
+router.get("/getAllCategory", categoryController.getAllCategory);
 
-router.post('/addCategory', categoryController.addCategory)
+router.post("/addCategory", categoryController.addCategory);
 
-router.put('/updateCategory/:category_id', categoryController.updateCategory)
+router.put("/updateCategory/:category_id", categoryController.updateCategory);
 
-router.delete('/deleteCategory/:category_id', categoryController.deleteCategory)
+router.delete(
+  "/deleteCategory/:category_id",
+  categoryController.deleteCategory
+);
 
 // get dishes by category
-router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCategory)
+router.get(
+  "/getDishesByCategory/:category_id",
+  dishesController.getDishesByCategory
+);
+=======
+router.get('/getAllCategory', categoryController.getAllCategory);
 
-// Order Master Route 
+router.post('/addCategory', categoryController.addCategory);
 
-router.post('/addOrderMaster', orderMasterController.addOrderMaster);
+router.put('/updateCategory/:category_id', categoryController.updateCategory);
 
-// Order Route 
+router.delete('/deleteCategory/:category_id', categoryController.deleteCategory);
 
-router.get('/getAllOrder', orderController.getAllOrder)
+// get dishes by category
+router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCategory);
+>>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
 
-router.post('/addOrder', orderController.addOrder)
+// Order Master Route
+
+router.post("/addOrderMaster", orderMasterController.addOrderMaster);
+
+// Order Route
+
+<<<<<<< HEAD
+router.get("/getAllOrder", orderController.getAllOrder);
+
+router.post("/addOrder", orderController.addOrder);
+=======
+router.get('/getAllOrder', orderController.getAllOrder);
+
+router.post('/addOrder', orderController.addOrder);
 
 router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
+>>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
+
+router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
+
+// User signup
+
+router.post("/userSignUp", userController.addUser);
+router.post("/userSignIn", userController.userLogin);
+
+// User cart
+
+router.get("/getCartDetails/:user_id", userCartController.getAllUserCartItem);
+
+router.get("/addCartData", userCartController.getAllUserCartItem);
+
+router.get("/plusQuntityCart/:cart_id", userCartController.plusCartQunatity);
+
+router.get("/minusQuntityCart/:cart_id", userCartController.minusCartQunatity);
+
+router.delete("/deleteCart/:cart_id", userCartController.deleteCart);
+
+//  User wishlist
+
+router.get(
+  "/getWishlistDetail/:user_id",
+  userWishlistController.getAllUserWishlist
+);
+
+router.delete(
+  "/delteWishlist/:wishlist_id",
+  userWishlistController.deleteWishlist
+);
+
+//user password recovery
+
+router.post("/forgot-password", userPasswordRecovery.forgotPassword);
+
+router.get("/reset-password/:id/:token", userPasswordRecovery.resetPassword);
+router.post("/reset-password/:id/:token", userPasswordRecovery.resetPasswordPost);
 
 
-
-
-module.exports = router
+<<<<<<< HEAD
+module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f

@@ -16,7 +16,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
     itemPrice: "",
     itemImage: "",
     category_name: "",
-    itemDescription: "", 
+    itemDescription: "",
   };
 
   useEffect(() => {
@@ -72,6 +72,14 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
         closeModal(false);
         toast.success("Item Added Successfully");
         action.resetForm();
+
+        const timeout = setTimeout(() => {
+          window.location.reload();
+
+          console.log("Timeout Cleared START");
+          clearTimeout(timeout);
+          console.log("Timeout Cleared END0");
+        },1000);
       },
     });
   function setImage(event) {
@@ -91,7 +99,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
         <form
           name="addItemForm"
           method="post"
-          onSubmit={handleSubmit} 
+          onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
           <div className="addItemForm">
@@ -173,7 +181,7 @@ const AddFoodItemModal = ({ closeModal, addFoodItem }) => {
                   <option value="italian">Italian</option>
                   <option value="american">American</option>
                 <option value="mexican">Mexican</option>*/}
-                <option selected>Select Here</option>
+                  <option selected>Select Here</option>
                   {allCategory.map((category) => {
                     return (
                       <option value={category.category_name}>

@@ -172,11 +172,8 @@ const FoodItem = () => {
                   return (
                     <tr key={item.dish_id}>
                       <td>
-                        {console.log("ITTTTTTTTTTTTTEM",item)}
-                        <img
-                          src={`${item.dish_image}`}
-                          alt="OK"
-                        />
+                        {console.log("ITTTTTTTTTTTTTEM", item.dish_image)}
+                        <img src={item.dish_image} />
                       </td>
                       <td>{item.dish_name}</td>
                       <td>{item.category}</td>
@@ -238,4 +235,3 @@ const FoodItem = () => {
   );
 };
 export default FoodItem;
- 

@@ -6,8 +6,10 @@ import SingleProduct from "../../Components/SingleProduct/SingleProduct";
 import Header from "../../Components/Header/Header";
 import Pagination from "../../Components/Pagination/Pagination";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
+import { IoSearch } from "react-icons/io5";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 const Shop = () => {
   const [shopData, setShopData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,12 +18,32 @@ const Shop = () => {
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const [searchText, setSearchText] = useState("");
 
   const [filterData, setFilterData] = useState(shopData);
 
   const currentPosts = filterData.slice(indexOfFirstPost, indexOfLastPost);
-
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  console.log("From local     ", user_id);
+  const navigate = useNavigate();
   useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+          console.log("Succcseee");
+        }).catch((err) => {
+          navigate('/login');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
+  useEffect(() => {
+    
     const fetch = async () => {
       setLoading(true);
 
@@ -50,6 +72,15 @@ const Shop = () => {
     fetch();
   }, []);
 
+  const searchFilter = () => {
+    setFilterData(
+      shopData.filter((data) =>
+        data.title.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+    setCurrentPage(1);
+  };
+
   const paginate = (pagenumber) => {
     if (
       pagenumber >= 1 &&
@@ -75,6 +106,23 @@ const Shop = () => {
       <Banner title="Shop Page" path="Shop" />
 
       <div className="shop__container">
+        <div className="shop__container--search">
+          <input
+            type="text"
+            value={searchText}
+            placeholder="Search "
+            onChange={(e) => {
+              setSearchText(e.target.value);
+
+              if (e.target.value == "") {
+                setFilterData(shopData);
+              }
+            }}
+          />
+          <button onClick={searchFilter}>
+            <IoSearch />
+          </button>
+        </div>
         <div className="shop__container--data">
           {currentPosts.map((data, index) => {
             return (

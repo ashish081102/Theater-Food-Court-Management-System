@@ -31,7 +31,7 @@ const Report = () => {
   const [startEnd, setEndDate] = useState();
   const [categories, setCategories] = useState([]);
   const [pdfData, setPdfData] = useState(null);
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
   //   useEffect(() => {
   //     axios
   //       .get("http://localhost:8080/api/admin/checkAdmin")
