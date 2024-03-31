@@ -8,7 +8,8 @@ import Pagination from "../../Components/Pagination/Pagination";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
 import { IoSearch } from "react-icons/io5";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 const Shop = () => {
   const [shopData, setShopData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,8 +23,27 @@ const Shop = () => {
   const [filterData, setFilterData] = useState(shopData);
 
   const currentPosts = filterData.slice(indexOfFirstPost, indexOfLastPost);
-
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  console.log("From local     ", user_id);
+  const navigate = useNavigate();
   useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+          console.log("Succcseee");
+        }).catch((err) => {
+          navigate('/login');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
+  useEffect(() => {
+    
     const fetch = async () => {
       setLoading(true);
 

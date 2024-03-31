@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Banner from "../../../Components/Banner/Banner";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "../Authentication.css";
@@ -7,11 +7,38 @@ import { useFormik } from "formik";
 import { LoginSchema } from "./LoginSchema";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import ForgotPasword from "../../../Components/ForgotPassword/ForgotPasword";
-const Login = () => {
-  const navigate = useNavigate();
+// import { setUser } from "../../../store/userSlice";
 
-  const [forgotPassword, setForgotPassword] = useState(false);
+// import { useDispatch, useSelector } from "react-redux";
+
+
+const Login = () => {
+  // const dispatch = useDispatch();
+
+  const setUserEmailAndId = (user_email, user_id) => {
+    // dispatch(setUser({ user_email, user_id }));
+    localStorage.setItem('user_id', JSON.stringify({ user_id, user_email }));
+  };
+  const navigate = useNavigate();
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+
+
+  useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+          navigate('/');
+        }).catch((err) => {
+          navigate('/login');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
 
   const userData = {
     email: "",
@@ -22,13 +49,14 @@ const Login = () => {
       user_password: user.password,
       user_email: user.email,
     };
-    console.log(userInfo);
     await axios
       .post("http://localhost:8080/api/admin/userSignIn", userInfo, {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data);
+        const { user_email, user_id } = response.data.userWithEmail;
+        console.log("From Login     ", user_email, user_id);
+        setUserEmailAndId(user_email, user_id);
         navigate("/");
       })
       .catch((error) => {

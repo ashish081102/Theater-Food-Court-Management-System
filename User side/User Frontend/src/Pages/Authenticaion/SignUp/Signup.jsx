@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "../../../Components/Banner/Banner";
 import { useFormik } from "formik";
 import "../Authentication.css";
@@ -7,6 +7,25 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
+
+  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  useEffect(() => {
+    async function verifyUser() {
+      await axios
+        .post("http://localhost:8080/api/admin/checkUser", {
+          userid: user_id
+        }, {
+          withCredentials: true,
+        }).then((response) => {
+
+          navigate('/login');
+        }).catch((err) => {
+          navigate('/sign-up');
+          console.log(err);
+        });
+    }
+    verifyUser();
+  }, []);
   const newUserData = {
     username: "",
     phone_number: "",
