@@ -11,13 +11,6 @@ const userWishlistController = require("../controllers/wishlistController.js");
 const userPasswordRecovery = require("../controllers/userPasswordRecovery.js");
 
 // router
-<<<<<<< HEAD
-const router = require("express").Router();
-
-//login
-
-router.post("/adminlogin", adminController.adminLogin);
-=======
 
 const router = require('express').Router();
 
@@ -26,18 +19,9 @@ const router = require('express').Router();
 router.post('/adminlogin', adminController.adminLogin);
 
 router.get('/checkAdmin', adminController.checkUser);
->>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
-
-router.get("/checkAdmin", adminController.checkUser);
+  
 
 // Dishes routers
-<<<<<<< HEAD
-router.post("/addDish", dishesController.upload, dishesController.addDish);
-
-router.get("/allDishes", dishesController.getAllDishes);
-
-router.get("/Dishes/:id", dishesController.getOneDish);
-=======
 router.post('/addDish', dishesController.upload, dishesController.addDish);
 
 router.get('/allDishes', dishesController.getAllDishes);
@@ -47,7 +31,6 @@ router.get('/Dishes/:id', dishesController.getOneDish);
 router.put('/Dishes/:id', dishesController.updateDishes);
 
 router.delete('/Dishes/:id', dishesController.deleteDish);
->>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
 
 router.put("/Dishes/:id", dishesController.updateDishes);
 
@@ -55,24 +38,6 @@ router.delete("/Dishes/:id", dishesController.deleteDish);
 
 // Category Url and Controller
 
-<<<<<<< HEAD
-router.get("/getAllCategory", categoryController.getAllCategory);
-
-router.post("/addCategory", categoryController.addCategory);
-
-router.put("/updateCategory/:category_id", categoryController.updateCategory);
-
-router.delete(
-  "/deleteCategory/:category_id",
-  categoryController.deleteCategory
-);
-
-// get dishes by category
-router.get(
-  "/getDishesByCategory/:category_id",
-  dishesController.getDishesByCategory
-);
-=======
 router.get('/getAllCategory', categoryController.getAllCategory);
 
 router.post('/addCategory', categoryController.addCategory);
@@ -83,7 +48,6 @@ router.delete('/deleteCategory/:category_id', categoryController.deleteCategory)
 
 // get dishes by category
 router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCategory);
->>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
 
 // Order Master Route
 
@@ -91,17 +55,11 @@ router.post("/addOrderMaster", orderMasterController.addOrderMaster);
 
 // Order Route
 
-<<<<<<< HEAD
-router.get("/getAllOrder", orderController.getAllOrder);
-
-router.post("/addOrder", orderController.addOrder);
-=======
 router.get('/getAllOrder', orderController.getAllOrder);
 
 router.post('/addOrder', orderController.addOrder);
 
 router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
->>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f
 
 router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
@@ -134,6 +92,10 @@ router.delete(
   userWishlistController.deleteWishlist
 );
 
+
+router.post("/checkUser", userController.checkUserLogin);
+
+
 //user password recovery
 
 router.post("/forgot-password", userPasswordRecovery.forgotPassword);
@@ -142,8 +104,4 @@ router.get("/reset-password/:id/:token", userPasswordRecovery.resetPassword);
 router.post("/reset-password/:id/:token", userPasswordRecovery.resetPasswordPost);
 
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 6ad884b3667d39e9346636260bc2c95a9cebdc5f

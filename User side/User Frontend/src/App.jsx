@@ -4,8 +4,7 @@ import RootLayout from "./Pages/RootLayout";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Authenticaion/Login/Login";
 
-import Signup from "./Pages/Authenticaion/SignUp/Signup";
-<<<<<<< HEAD
+import Signup from "./Pages/Authenticaion/SignUp/Signup"; 
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 
 //for testing delete after wok is done
@@ -17,8 +16,7 @@ import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 //end-- delete this
 
 import Cart from "./Pages/Cart/Cart";
-import Wishlist from "./Pages/WishList/WishList";
->>>>>>> 8ea61342519939aeed71aaed0560bded1abb62c5
+import Wishlist from "./Pages/WishList/WishList"; 
 function App() {
   const router = createBrowserRouter([
     {

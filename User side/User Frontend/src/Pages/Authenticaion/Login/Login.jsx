@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../../Components/Banner/Banner";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "../Authentication.css";
@@ -7,33 +7,39 @@ import { useFormik } from "formik";
 import { LoginSchema } from "./LoginSchema";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import ForgotPasword from "../../../Components/ForgotPassword/ForgotPasword";
 // import { setUser } from "../../../store/userSlice";
 
 // import { useDispatch, useSelector } from "react-redux";
 
-
 const Login = () => {
   // const dispatch = useDispatch();
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   const setUserEmailAndId = (user_email, user_id) => {
     // dispatch(setUser({ user_email, user_id }));
-    localStorage.setItem('user_id', JSON.stringify({ user_id, user_email }));
+    localStorage.setItem("user_id", JSON.stringify({ user_id, user_email }));
   };
   const navigate = useNavigate();
-  const user_id = JSON.parse(localStorage.getItem('user_id'));
-
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
 
   useEffect(() => {
     async function verifyUser() {
       await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
-          navigate('/');
-        }).catch((err) => {
-          navigate('/login');
+        .post(
+          "http://localhost:8080/api/admin/checkUser",
+          {
+            userid: user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          navigate("/");
+        })
+        .catch((err) => {
+          navigate("/login");
           console.log(err);
         });
     }
@@ -98,9 +104,7 @@ const Login = () => {
         </div>
 
         {forgotPassword ? (
-          <ForgotPasword
-          setForgotPassword={setForgotPassword}
-          />
+          <ForgotPasword setForgotPassword={setForgotPassword} />
         ) : (
           <form className="form login__right" onSubmit={handleSubmit}>
             <h2>Login</h2>
