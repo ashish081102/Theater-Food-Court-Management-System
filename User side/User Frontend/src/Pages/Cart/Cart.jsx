@@ -50,7 +50,7 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-12 m-b30">
                   <div className="table-responsive">
-                    <CartTable cartData={cartItems} />
+                    <CartTable />
                   </div>
                 </div>
               </div>

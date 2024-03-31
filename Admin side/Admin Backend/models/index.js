@@ -39,6 +39,8 @@ db.admin = require('./adminModel.js')(sequelize, DataTypes)
 db.user = require('./userModel.js')(sequelize, DataTypes)
 db.orderMaster = require('./orderMasterModel')(sequelize, DataTypes)
 db.order = require('./orderModel')(sequelize, DataTypes)
+db.cart = require('./cartModel.js')(sequelize, DataTypes)
+db.wishlist = require('./wishlistModel.js')(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
     .then(() => {
@@ -88,6 +90,36 @@ db.order.belongsTo(db.dishes, {
     foreignKey: 'dish_id',
     // as: 'dishes'
 });
+
+db.dishes.hasMany(db.cart, {
+    foreignKey: 'dish_id',
+})
+db.cart.belongsTo(db.dishes, {
+    foreignKey: 'dish_id',
+})
+
+db.user.hasMany(db.cart, {
+    foreignKey: 'user_id',
+})
+
+db.cart.belongsTo(db.user, {
+    foreignKey: 'user_id',
+})
+
+db.dishes.hasMany(db.wishlist, {
+    foreignKey: 'dish_id',
+})
+
+db.wishlist.belongsTo(db.dishes, {
+    foreignKey: 'dish_id',
+})
+db.user.hasMany(db.wishlist, {
+    foreignKey: 'user_id',
+})
+
+db.wishlist.belongsTo(db.dishes, {
+    foreignKey: 'dish_id',
+})
 
 
 module.exports = db

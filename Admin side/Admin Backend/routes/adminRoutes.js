@@ -1,10 +1,12 @@
 // import controllers review, products
-const categoryController = require('../controllers/categoryController.js');
-const dishesController = require('../controllers/dishesController.js');
-const adminController = require('../controllers/loginController.js');
-const orderController = require('../controllers/orderController.js');
-const orderMasterController = require('../controllers/orderMasterController.js');
-const userController = require('../controllers/userRegistration.js');
+const categoryController = require('../controllers/categoryController.js')
+const dishesController = require('../controllers/dishesController.js')
+const adminController = require('../controllers/loginController.js')
+const orderController = require('../controllers/orderController.js')
+const orderMasterController = require('../controllers/orderMasterController.js')
+const userController = require('../controllers/userRegistration.js')
+const userCartController = require('../controllers/userCart.js')
+const userWishlistController = require('../controllers/wishlistController.js')
 // router
 
 const router = require('express').Router();
@@ -58,8 +60,26 @@ router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
 // User signup
 
 router.post('/userSignUp', userController.addUser);
-router.post('/userSignIn', userController.userLogin);
+router.post('/userSignIn', userController.userLogin)
 
-router.post("/checkUser", userController.checkUserLogin);
+
+// User cart
+
+router.get('/getCartDetails/:user_id', userCartController.getAllUserCartItem);
+
+router.get('/addCartData', userCartController.getAllUserCartItem);
+
+router.get('/plusQuntityCart/:cart_id', userCartController.plusCartQunatity)
+
+router.get('/minusQuntityCart/:cart_id', userCartController.minusCartQunatity)
+
+router.delete('/deleteCart/:cart_id', userCartController.deleteCart)
+
+//  User wishlist
+
+router.get('/getWishlistDetail/:user_id', userWishlistController.getAllUserWishlist)
+
+router.delete('/delteWishlist/:wishlist_id', userWishlistController.deleteWishlist)
+
 
 module.exports = router;

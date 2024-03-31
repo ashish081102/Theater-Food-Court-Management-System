@@ -218,8 +218,7 @@ const Home = () => {
                     <img src="/images/home-banner/food-6.png" alt="" />
                   </a>
                 </li>
-              </ul>
-              <img src="/images/home-banner/line.png" className="line" alt="" />
+              </ul> 
             </div>
             <span
               className="swiper-notification"
@@ -235,7 +234,7 @@ const Home = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_8_1378)">
+                <g clipPath="url(#clip0_8_1378)">
                   <path
                     d="M60.2271 478.227C122.996 542.283 204.806 546.786 237.865 541.03L232.117 12.0103C122.738 -3.19512 101.513 76.5857 104.573 118.377C104.607 250.193 67.8485 287.524 42.9781 335.93C29.3557 362.443 -18.2339 398.157 60.2271 478.227Z"
                     fill="var(--primary)"
@@ -243,8 +242,8 @@ const Home = () => {
                   <path
                     d="M50.231 490.237C115.966 557.279 201.643 561.992 236.265 555.968L230.248 2.28022C115.699 -13.6335 93.4707 69.8676 96.6751 113.607C96.7102 251.57 58.2139 290.642 32.1676 341.305C17.9012 369.055 -31.938 406.434 50.231 490.237Z"
                     stroke="var(--primary)"
-                    stroke-width="2"
-                    stroke-dasharray="15 15"
+                    strokeWidth="2"
+                    strokeDasharray="15 15"
                   ></path>
                 </g>
                 <defs>
@@ -949,7 +948,7 @@ const Home = () => {
                 <div className="swiper-btn">
                   <div
                     className="product-swiper-prev btn-prev style-1"
-                    tabindex="0"
+                    tabIndex="0"
                     role="button"
                     aria-label="Previous slide"
                     aria-controls="swiper-wrapper-55745f4658afde7d"
@@ -958,7 +957,7 @@ const Home = () => {
                   </div>
                   <div
                     className="product-swiper-next btn-next style-1"
-                    tabindex="0"
+                    tabIndex="0"
                     role="button"
                     aria-label="Next slide"
                     aria-controls="swiper-wrapper-55745f4658afde7d"
@@ -1800,7 +1799,7 @@ const Home = () => {
                 </div>
                 <div
                   className="testi-swiper-next btn-next style-1"
-                  tabindex="0"
+                  tabIndex="0"
                   role="button"
                   aria-label="Previous slide"
                   aria-controls="swiper-wrapper-e5848612e1025f81f"
