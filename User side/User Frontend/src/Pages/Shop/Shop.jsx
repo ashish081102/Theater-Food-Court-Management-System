@@ -26,46 +26,54 @@ const Shop = () => {
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   console.log("From local     ", user_id);
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   async function verifyUser() {
+  //     await axios
+  //       .post("http://localhost:8080/api/admin/checkUser", {
+  //         userid: user_id
+  //       }, {
+  //         withCredentials: true,
+  //       }).then((response) => {
+  //         console.log("Succcseee");
+  //       }).catch((err) => {
+  //         navigate('/login');
+  //         console.log(err);
+  //       });
+  //   }
+  //   verifyUser();
+  // }, []);
   useEffect(() => {
-    async function verifyUser() {
-      await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
-          console.log("Succcseee");
-        }).catch((err) => {
-          navigate('/login');
-          console.log(err);
-        });
-    }
-    verifyUser();
-  }, []);
-  useEffect(() => {
-    
+
     const fetch = async () => {
       setLoading(true);
 
-      setShopData(ShopData);
 
       //API CALL HERE
+      let arr = [];
+      await axios
+        .get("http://localhost:8080/api/admin/allDishes")
+        .then((response) => {
 
-      // const response = await axios.get(
-      //   "../../data/FoodList.json"
-      // );
-      // console.log("First time load", response.data);
-      // const data = response.data;
 
-      // merging food with its correspondoing category name
+          let data = response.data;
+          arr = data.map((d) => {
+            let newData =
+            {
+              id: d.dish_id,
+              image: d.dish_image,
+              title: d.dish_name,
+              description: d.dish_description,
+              rating: d.rating,
+              price: d.dish_price
 
-      // const mergedData = data.map((item) => {
-      //   return { ...item, category: item.category.category_name };
-      // });
-      // console.log("Merged ", mergedData);
-      // setFoodData(mergedData);
+            };
+            return newData;
+          });
+          setShopData(arr);
+          setFilterData(arr);
 
-      setFilterData(ShopData);
+        });
+      
       setLoading(false);
     };
 
@@ -102,7 +110,6 @@ const Shop = () => {
     </div>
   ) : (
     <div className="shop">
-      <Header />
       <Banner title="Shop Page" path="Shop" />
 
       <div className="shop__container">

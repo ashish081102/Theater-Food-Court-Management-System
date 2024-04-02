@@ -11,28 +11,28 @@ const Cart = () => {
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   console.log("From local     ", user_id);
   const navigate = useNavigate();
-  useEffect(() => {
-    async function verifyUser() {
-      await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
-          console.log("Succcseee");
-        }).catch((err) => {
-          navigate('/login');
-          console.log(err);
-        });
-    }
-    verifyUser();
-  }, []);
+  // useEffect(() => {
+  //   async function verifyUser() {
+  //     await axios
+  //       .post("http://localhost:8080/api/admin/checkUser", {
+  //         userid: user_id
+  //       }, {
+  //         withCredentials: true,
+  //       }).then((response) => {
+  //         console.log("Succcseee");
+  //       }).catch((err) => {
+  //         navigate('/login');
+  //         console.log(err);
+  //       });
+  //   }
+  //   verifyUser();
+  // }, []);
   useEffect(() => {
     async function getCartDetail() {
       await axios
         .get("")
         .then((res) => {
-          setCartItems(res.data);
+            setCartItems(res.data);
         })
         .catch((err) => {
           console.log(err);

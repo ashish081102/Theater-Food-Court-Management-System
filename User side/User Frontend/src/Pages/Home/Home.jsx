@@ -28,7 +28,6 @@ const Home = () => {
     }
     verifyUser();
   }, []);
-
   return (
     <div className="page-wraper">
       <div className="page-content">

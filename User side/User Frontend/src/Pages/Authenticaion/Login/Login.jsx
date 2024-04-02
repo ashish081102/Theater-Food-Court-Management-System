@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 // import { useDispatch, useSelector } from "react-redux";
 
-
 const Login = () => {
   // const dispatch = useDispatch();
 
@@ -21,13 +20,12 @@ const Login = () => {
   };
   const navigate = useNavigate();
   const user_id = JSON.parse(localStorage.getItem('user_id'));
-
-
   useEffect(() => {
     async function verifyUser() {
+      console.log(user_id);
       await axios
         .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
+          userid: user_id 
         }, {
           withCredentials: true,
         }).then((response) => {
@@ -37,7 +35,8 @@ const Login = () => {
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id)
+      verifyUser();
   }, []);
 
   const userData = {
@@ -97,63 +96,59 @@ const Login = () => {
           </button>
         </div>
 
-        {forgotPassword ? (
-          <ForgotPasword
-          setForgotPassword={setForgotPassword}
-          />
-        ) : (
-          <form className="form login__right" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <p>If you have an account with us, please log in.</p>
 
-            <div className="login__right__input">
-              <div className="login__right__input__control">
-                <label htmlFor="email">
-                  E-MAIL <sup>*</sup>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter your email"
-                />
-                {errors.email && touched.email ? (
-                  <p className="form-error">{errors.email}</p>
-                ) : null}
-              </div>
-              <div className="login__right__input__control">
-                <label htmlFor="password">
-                  PASSWORD <sup>*</sup>
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Type Password"
-                />
-                {errors.password && touched.password ? (
-                  <p className="form-error">{errors.password}</p>
-                ) : null}
-              </div>
+        <form className="form login__right" onSubmit={handleSubmit}>
+          <h2>Login</h2>
+          <p>If you have an account with us, please log in.</p>
 
-              <div className="login__right__button">
-                <button className="btn-primary">Login</button>
-                <p onClick={() => setForgotPassword(true)}>
-                  <span>
-                    <LockOpenIcon />
-                  </span>
-                  Forgot Password
-                </p>
-              </div>
+          <div className="login__right__input">
+            <div className="login__right__input__control">
+              <label htmlFor="email">
+                E-MAIL <sup>*</sup>
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Enter your email"
+              />
+              {errors.email && touched.email ? (
+                <p className="form-error">{errors.email}</p>
+              ) : null}
             </div>
-          </form>
-        )}
+            <div className="login__right__input__control">
+              <label htmlFor="password">
+                PASSWORD <sup>*</sup>
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Type Password"
+              />
+              {errors.password && touched.password ? (
+                <p className="form-error">{errors.password}</p>
+              ) : null}
+            </div>
+
+            <div className="login__right__button">
+              <button className="btn-primary">Login</button>
+              <p onClick={() => setForgotPassword(true)}>
+                <span>
+                  <LockOpenIcon />
+                </span>
+                Forgot Password
+              </p>
+            </div>
+          </div>
+        </form>
+
       </div>
     </>
   );

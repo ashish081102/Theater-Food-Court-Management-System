@@ -5,7 +5,7 @@ const CartTable = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     async function getCartDetail() {
-      const user_id = 69;
+      const user_id = 57;
 
       await axios
         .get("http://localhost:8080/api/admin/getCartDetails/" + user_id)
@@ -105,7 +105,8 @@ const CartTable = () => {
           cartItems.map((value) => (
             <tr>
               <td class="product-item-img">
-                <img src="assets/images/product/pic1.jpg" alt="" />
+                console.log(value)
+                {/* <img src= alt="" /> */}
               </td>
               <td class="product-item-name text-secondary">
                 {value.category_name}
