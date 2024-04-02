@@ -7,11 +7,9 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         ordermaster_id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false
-
         },
-       
         dish_id: {
             type: DataTypes.INTEGER,
             allowNull: false

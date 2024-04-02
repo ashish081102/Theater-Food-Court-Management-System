@@ -1,4 +1,6 @@
+
 // import controllers review, products
+
 const categoryController = require('../controllers/categoryController.js')
 const dishesController = require('../controllers/dishesController.js')
 const adminController = require('../controllers/loginController.js')
@@ -7,6 +9,9 @@ const orderMasterController = require('../controllers/orderMasterController.js')
 const userController = require('../controllers/userRegistration.js')
 const userCartController = require('../controllers/userCart.js')
 const userWishlistController = require('../controllers/wishlistController.js')
+const payemntController = require('../controllers/paymentController');
+const ticketController = require('../controllers/ticketController.js')
+
 // router
 const router = require('express').Router()
 
@@ -55,6 +60,7 @@ router.post('/addOrder', orderController.addOrder)
 
 router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
 
+router.get('/getUserOrder/:user_id', orderController.getUserOrder)
 
 // User signup
 
@@ -66,7 +72,7 @@ router.post('/userSignIn', userController.userLogin)
 
 router.get('/getCartDetails/:user_id', userCartController.getAllUserCartItem);
 
-router.get('/addCartData', userCartController.getAllUserCartItem);
+router.post('/addCartData', userCartController.getAllUserCartItem);
 
 router.get('/plusQuntityCart/:cart_id', userCartController.plusCartQunatity)
 
@@ -79,6 +85,17 @@ router.delete('/deleteCart/:cart_id', userCartController.deleteCart)
 router.get('/getWishlistDetail/:user_id', userWishlistController.getAllUserWishlist)
 
 router.delete('/delteWishlist/:wishlist_id', userWishlistController.deleteWishlist)
+
+// ticket info
+router.post('/checkUserTicket', ticketController.checkUserTicket)
+// Payment routes
+
+router.post('/checkout', payemntController.checkout)
+
+router.post('/paymentVerify', payemntController.paymentVerification)
+
+router.get('/getKey', payemntController.getKeyRazor)
+
 
 
 module.exports = router

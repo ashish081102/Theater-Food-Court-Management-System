@@ -1,7 +1,7 @@
-module.exports = (sequelize, DataTypes) => {
 
-    const User = sequelize.define("user", {
-        user_id: {
+module.exports = (sequelize, DataTypes) => {
+    const Ticket = sequelize.define("ticket", {
+        ticket_id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
@@ -10,23 +10,23 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         user_email: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        user_mobile_no: {
+        user_mobile: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        token: {
+        user_seat: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
+        },
+        user_screen: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     })
-    User.removeAttribute('id');
-    return User
+    Ticket.removeAttribute('id');
+    return Ticket
 }

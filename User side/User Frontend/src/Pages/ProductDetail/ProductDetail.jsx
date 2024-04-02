@@ -5,13 +5,24 @@ import SHOP_DATA from "../../data/FoodList.json";
 import Banner from "../../Components/Banner/Banner";
 import Header from "../../Components/Header/Header";
 import { FaCartShopping } from "react-icons/fa6";
-
+// import { Link, useNavigate } from "react-router-dom";
 const ProductDetail = () => {
-  const param = useParams();
   const navigate = useNavigate();
+  const param = useParams();
+
   const productId = param.productId;
   const currentData = SHOP_DATA.find((data) => data.id == productId);
-
+  async function addToCart(cartItem) {
+    console.log(cartItem);
+    // await axios
+    //   .post("http://localhost:8080/api/admin/addCart/" + cartItem)
+    //   .then((res) => {
+    //     navigate("/cart-detail");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
   return !currentData ? (
     <>
       <h1>Dont Change Url Please!</h1>
@@ -25,7 +36,7 @@ const ProductDetail = () => {
     </>
   ) : (
     <div className="product__details">
-      <Header />
+      {/* <Header /> */}
       <Banner title={"Product Detail"} path={"Product Detail"} />
 
       <div className="product__details__row">
@@ -51,11 +62,7 @@ const ProductDetail = () => {
                 $ {currentData.price}
                 <span>$ {currentData.price * 8 - 12}</span>
               </p>
-              <button
-                onClick={() => {
-                  console.log("Current Data : ", currentData);
-                }}
-              >
+              <button onClick={() => addToCart(currentData)}>
                 Add To Cart <FaCartShopping />
               </button>
             </div>

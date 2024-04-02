@@ -79,10 +79,39 @@ const getSpecificDatesOrder = async (req, res) => {
 
 }
 
+const getUserOrder = async (req, res) => {
+    const user_id = req.params['user_id']
+    try {
+        const currentDate = new Date();
+
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+
+        const allCartItems = await db.sequelize.query(`
+            SELECT
+                dishes.dish_image,
+                dishes.dish_name,
+                orders.order_price,
+                ordersmaster.ordermaster_id,
+                ordersmaster.total_price
+            FROM
+                orders
+            INNER JOIN dishes ON dishes.dish_id = orders.dish_id AND orders.order_date = '${formattedDate}'
+            INNER JOIN ordersmaster ON orders.ordermaster_id= ordersmaster.ordermaster_id AND ordersmaster.user_id = ${user_id}
+    `, { type: db.sequelize.QueryTypes.SELECT });
+        console.log(allCartItems)
+        res.status(200).send(allCartItems)
+    } catch (err) {
+        res.status(400).send()
+    }
+}
 
 module.exports = {
     addOrder,
     getAllOrder,
     getSpecificDatesOrder,
-
+    getUserOrder
 }

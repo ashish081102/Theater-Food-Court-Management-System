@@ -7,7 +7,7 @@ const Cart = db.cart
 
 
 
-// // functions
+// functions
 
 // //1. Add Cart
 
@@ -38,7 +38,8 @@ const getAllUserCartItem = async (req, res) => {
                 dishes.dish_name,
                 category.category_name,
                 cart.quantity,
-                dishes.dish_price
+                dishes.dish_price,
+                dishes.dish_image
             FROM
                 cart
             INNER JOIN 

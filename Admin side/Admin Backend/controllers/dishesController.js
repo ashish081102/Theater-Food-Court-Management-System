@@ -13,9 +13,7 @@ const Category = db.category;
 // 1. create dishes
 
 const addDish = async (req, res) => {
-  // console.log("====================================================================");
-  // console.log("File Here ............. ",req.file)
-  // console.log("====================================================================");
+
   const category_id = await getCategoryByName(req.body.category_name);
 
   let info = {

@@ -7,7 +7,7 @@ const WishList = db.wishlist
 
 
 
-// // functions
+// functions
 
 // //1. Add Cart
 
@@ -36,7 +36,8 @@ const getAllUserWishlist = async (req, res) => {
                 users.user_id,
                 dishes.dish_name,
                 category.category_name,
-                dishes.dish_price
+                dishes.dish_price,
+                dishes.dish_image
             FROM    
                 wishlist
             INNER JOIN 

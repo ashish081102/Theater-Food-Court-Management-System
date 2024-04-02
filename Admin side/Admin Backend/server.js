@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 
 require("dotenv").config();
-
+const Razorpay = require('razorpay');
 const app = express();
 
 const cookieParser = require("cookie-parser");
@@ -33,17 +33,15 @@ app.use("/api/admin", router);
 
 
 const path = require('path')
-app.use('/Images', express.static('./Images'))
-// app.use('Images', express.static(path.join(__dirname, '/Images')))
-// console.log(__dirname + "./Images");
-// app.use('/local-files', express.static('/'));
-
-// app.use('/Images', express.static('./Images'))
-// app.use('/local-files', express.static('/'));
+// e('/local-files', express.static('/'));
 
 app.use("/Images", express.static("./Images"));
 
-
+// const instance = new Razorpay({
+//   key_id: process.env.REZORPAY_API_KEY,
+//   key_secret: process.env.REZORPAY_API_SECRET,
+// });
+// module.exports = { instance }
 //port
 
 const PORT = process.env.PORT;

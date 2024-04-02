@@ -172,10 +172,8 @@ const FoodItem = () => {
                   return (
                     <tr key={item.dish_id}>
                       <td>
-                        {console.log("ITTTTTTTTTTTTTEM",item)}
-                        <img
-                          src={`file:///D:/food court app/Admin side/Admin Backend/Images/${item.dish_image}`}
-                        />
+                        {console.log("ITTTTTTTTTTTTTEM", item)}
+                        <img src={item.dish_image} />
                       </td>
                       <td>{item.dish_name}</td>
                       <td>{item.category}</td>
@@ -237,4 +235,3 @@ const FoodItem = () => {
   );
 };
 export default FoodItem;
- 

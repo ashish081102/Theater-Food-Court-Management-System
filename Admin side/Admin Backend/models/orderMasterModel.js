@@ -2,8 +2,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const OrdersMaster = sequelize.define("ordersMaster", {
         ordermaster_id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+            type: DataTypes.STRING,
             primaryKey: true
         },
         user_id: {
@@ -11,14 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         total_price: {
-            type: DataTypes.DECIMAL(11, 10)
+            type: DataTypes.INTEGER
         },
-        payemnt_type: {
-            type: DataTypes.STRING
-        },
-        payemnt_status: {
-            type: DataTypes.STRING
-        }
     }, {
         freezeTableName: true
     })

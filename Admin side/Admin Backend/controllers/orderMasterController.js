@@ -13,9 +13,8 @@ const addOrderMaster = async (req, res) => {
 
     let data = {
         user_id: req.body.user_id,
-        order_date: req.body.order_date,
+        order_date: new Date(),
         total_price: req.body.total_price,
-        payment_type: req.body.payment_type,
         payment_status: req.body.payment_status,
 
     }

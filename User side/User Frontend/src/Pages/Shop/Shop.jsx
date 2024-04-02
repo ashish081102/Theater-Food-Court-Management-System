@@ -82,7 +82,7 @@ const Shop = () => {
     </div>
   ) : (
     <div className="shop">
-      <Header />
+      {/* <Header /> */}
       <Banner title="Shop Page" path="Shop" />
 
       <div className="shop__container">

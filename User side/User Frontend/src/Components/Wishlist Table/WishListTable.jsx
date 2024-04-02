@@ -52,7 +52,7 @@ const WishListTable = () => {
           wishlistItem.map((value) => (
             <tr>
               <td class="product-item-img">
-                <img src="assets/images/product/pic1.jpg" alt="" />
+                <img src={value.dish_image} alt="" />
               </td>
               <td class="product-item-name text-secondary">
                 {value.category_name}
