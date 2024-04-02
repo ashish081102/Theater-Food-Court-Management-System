@@ -9,7 +9,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: true,
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -30,7 +30,6 @@ const router = require("./routes/adminRoutes");
 app.use("/api/admin", router);
 
 //static Images Folder
-
 
 const path = require('path');
 app.use('/Images', express.static('./Images'));

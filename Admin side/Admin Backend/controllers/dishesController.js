@@ -17,7 +17,6 @@ const addDish = async (req, res) => {
   // console.log("File Here ............. ",req.file)
   // console.log("====================================================================");
   const category_id = await getCategoryByName(req.body.category_name);
-
   let info = {
     dish_image: `http://localhost:8080/${req.file.path}`,
     dish_name: req.body.dish_name,

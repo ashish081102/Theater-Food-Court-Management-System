@@ -44,32 +44,34 @@ const addUser = async (req, res) => {
 };
 
 const checkUserLogin = async (req, res) => {
-    const {user_id} = req.body.userid;
+    console.log("callledddd 1111");
+    const { user_id } = req.body.userid;
     // console.log("---------------------------", req.body, "---------------------------");
     let useVal = await User.findOne({
         where: { user_id: user_id }
         ,
         attributes: ['token']
     }
-    ); 
+    );
     if (!jwt.verify(req.cookies.tokenVal, process.env.SECRET_KEY)) {
         console.log("---------------------------", "Hemllooo", "---------------------------");
         console.log("hemllllo");
         res.status(400).send("Login again");
     } else {
-        res.status(200).send(   
+        res.status(200).send(
             { message: "Successfully Login" }
         );
     }
+    console.log("callledddd 222222");
 };
 
 const createToken = (user_email) => {
     const jwtToken = jwt.sign({ token: user_email }, process.env.SECRET_KEY);
     return jwtToken;
 };
-const checkUser = async (email) => {
-
-    let useVal = await User.findOne({ where: { user_email: email } });
+const checkUser = async (user_email) => {
+    console.log("-----------------------", user_email, "-----------------------");
+    let useVal = await User.findOne({ where: { user_email: user_email } });
     console.log(useVal);
     if (useVal) {
         return true;
