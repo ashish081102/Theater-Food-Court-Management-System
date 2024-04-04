@@ -1,7 +1,23 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    const getCategory = async () => {
+      await axios
+        .get("http://localhost:8080/api/admin/getAllCategory")
+        .then((response) => {
+          setCategory(response.data);
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+        });
+    };
+
+    getCategory();
+  }, []);
   return (
     <header className="site-header mo-left header ">
       <div className="sticky-header main-bar-wraper navbar-expand-lg">
@@ -58,27 +74,37 @@ const Header = () => {
                   <Link>About Us </Link>
                 </li>
                 <li className="sub-menu-down active">
-                {/* <Link to="/shop"/>Shop</Link> */}
-                  <a href="javascript:void(0);">Shop</a>
+                  {/* <Link to="/shop"/>Shop</Link> */}
+                  <a href="javascript:void(0);">Category</a>
                   <ul className="sub-menu show">
+                    {category.map((data) => {
+                      return (
+                        <li key={data.category_id}>
+                          <Link to={`/shop/${data.category_id}`}>
+                            {data.category_name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+
+                    {/* <li>
+                      <Link to="/shop">Shop Grid</Link>
+                    </li>
                     <li>
-                    <Link to="/shop">Shop Grid</Link>
-                    </li> 
-                    <li>
-                    <Link to="/cart-detail">Shop Cart </Link>
+                      <Link to="/cart-detail">Shop Cart </Link>
                     </li>
                     <li>
                       <a href="#">Shop Checkout</a>
                     </li>
                     <li className="active">
-                    <Link to="/wishlist">Wishlist </Link>
+                      <Link to="/wishlist">Wishlist </Link>
                     </li>
                     <li>
-                    <Link to="/login">Login</Link>
+                      <Link to="/login">Login</Link>
                     </li>
                     <li>
-                    <Link to="/sign-up">Registration</Link>
-                    </li>
+                      <Link to="/sign-up">Registration</Link>
+                    </li> */}
                   </ul>
                 </li>
                 <li className="sub-menu-down">

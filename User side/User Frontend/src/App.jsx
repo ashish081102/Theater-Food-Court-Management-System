@@ -43,7 +43,7 @@ function App() {
           element: <Wishlist />,
         },
         {
-          path: "/shop",
+          path: "/shop/:category_id",
           element: <Shop />,
         },
         {

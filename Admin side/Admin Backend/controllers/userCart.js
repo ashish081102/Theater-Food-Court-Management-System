@@ -1,37 +1,34 @@
-const db = require('../models')
+const db = require("../models");
 
 const { Op } = require("sequelize");
-const cartModel = require('../models/cartModel');
+const cartModel = require("../models/cartModel");
 // model
-const Cart = db.cart
-
-
+const Cart = db.cart;
 
 // // functions
 
 // //1. Add Cart
 
 const addCart = async (req, res) => {
+  console.log("DDDTTTTTTTAAAATATATATATATATATATATATATATTATATA", req.body);
 
-    let data = {
-        dish_id: req.body.dish_id,
-        user_id: req.body.user_id,
-        quantity: req.body.quantity
-    }
+  let data = {
+    dish_id: req.body.dish_id,
+    user_id: req.body.user_id,
+    quantity: req.body.quantity,
+  };
 
-    const Cart = await Cart.create(data)
-    res.status(200).send(Cart)
-
-}
+  const cart = await Cart.create(data);
+  res.status(200).send(cart);
+};
 
 // 2. Get All Cart Item of Selected User
 
 const getAllUserCartItem = async (req, res) => {
+  let user_id = req.params["user_id"];
 
-    let user_id = req.params['user_id']
-
-
-    const cartItems = await db.sequelize.query(`
+  const cartItems = await db.sequelize.query(
+    `
             SELECT
                 cart.cart_id,
                 users.user_id,
@@ -47,58 +44,59 @@ const getAllUserCartItem = async (req, res) => {
                 users ON users.user_id = cart.user_id AND users.user_id = ${user_id}  
             INNER JOIN 
                 category ON category.category_id = dishes.category_id AND dishes.dish_id = cart.dish_id
-     `, { type: db.sequelize.QueryTypes.SELECT });
+     `,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
 
-    res.status(200).send(cartItems)
-
-}
+  res.status(200).send(cartItems);
+};
 // 3. update cart
 
 const plusCartQunatity = async (req, res) => {
-    try {
-        let cart_id = req.params['cart_id']
+  try {
+    let cart_id = req.params["cart_id"];
 
-        const updatedCart = await Cart.update({ quantity: db.sequelize.literal('quantity + 1') }, { where: { cart_id: cart_id } })
+    const updatedCart = await Cart.update(
+      { quantity: db.sequelize.literal("quantity + 1") },
+      { where: { cart_id: cart_id } }
+    );
 
-        res.status(200).send(updatedCart)
-
-
-    } catch (err) {
-        res.status(400).send("")
-    }
-}
+    res.status(200).send(updatedCart);
+  } catch (err) {
+    res.status(400).send("");
+  }
+};
 const minusCartQunatity = async (req, res) => {
-    try {
+  try {
+    let cart_id = req.params["cart_id"];
 
-        let cart_id = req.params['cart_id']
+    const updatedCart = await Cart.update(
+      { quantity: db.sequelize.literal("quantity - 1") },
+      { where: { cart_id: cart_id } }
+    );
 
-        const updatedCart = await Cart.update({ quantity: db.sequelize.literal('quantity - 1') }, { where: { cart_id: cart_id } })
-
-        res.status(200).send(updatedCart)
-    } catch (err) {
-        res.status(400).send("")
-    }
-
-}
+    res.status(200).send(updatedCart);
+  } catch (err) {
+    res.status(400).send("");
+  }
+};
 
 const deleteCart = async (req, res) => {
-    try {
-        let id = req.params['cart_id']
+  try {
+    let id = req.params["cart_id"];
 
-        await Cart.destroy({ where: { cart_id: id } })
+    await Cart.destroy({ where: { cart_id: id } });
 
-        res.status(200).send('Category is deleted !')
-
-    } catch (err) {
-        res.status(400).send('not able to delete cart');
-    }
-}
+    res.status(200).send("Category is deleted !");
+  } catch (err) {
+    res.status(400).send("not able to delete cart");
+  }
+};
 
 module.exports = {
-    getAllUserCartItem,
-    addCart,
-    plusCartQunatity,
-    minusCartQunatity,
-    deleteCart
-
-}
+  getAllUserCartItem,
+  addCart,
+  plusCartQunatity,
+  minusCartQunatity,
+  deleteCart,
+};

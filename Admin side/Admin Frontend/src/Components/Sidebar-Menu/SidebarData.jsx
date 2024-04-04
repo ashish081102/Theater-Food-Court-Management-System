@@ -25,14 +25,14 @@ export const SidebarData = [
     className: "nav-text",
   },
   {
-    title: "Combo",
-    path: "/combo",
+    title: "Order Details",
+    path: "/order-details",
     icon: <FaIcons.FaFolderPlus />,
     className: "nav-text",
   },
   {
-    title: "Order Details",
-    path: "/order-details",
+    title: "Transaction",
+    path: "/payment-details",
     icon: <FaIcons.FaFolderPlus />,
     className: "nav-text",
   },

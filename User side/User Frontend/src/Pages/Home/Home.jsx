@@ -9,24 +9,34 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   // const user_id = useSelector((state) => state.user.user_id);
-  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   console.log("From local     ", user_id);
   const navigate = useNavigate();
   useEffect(() => {
     async function verifyUser() {
       await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
+        .post(
+          "http://localhost:8080/api/admin/checkUser",
+          {
+            userid: user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
           console.log("Succcseee");
-        }).catch((err) => {
-          navigate('/login');
+        })
+        .catch((err) => {
+          navigate("/login");
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      verifyUser();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   return (
@@ -218,7 +228,7 @@ const Home = () => {
                     <img src="/images/home-banner/food-6.png" alt="" />
                   </a>
                 </li>
-              </ul> 
+              </ul>
             </div>
             <span
               className="swiper-notification"

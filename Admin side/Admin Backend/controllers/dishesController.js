@@ -87,11 +87,10 @@ const deleteDish = async (req, res) => {
 const getDishesByCategory = async (req, res) => {
   const id = req.params.category_id;
 
-  const data = await Dishes.findOne({
+  const data = await Dishes.findAll({
     include: [
       {
-        model: categoryModel,
-        as: "category",
+        model: db.category, 
       },
     ],
     where: { category_id: id },

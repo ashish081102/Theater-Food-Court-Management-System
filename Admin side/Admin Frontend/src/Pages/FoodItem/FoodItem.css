@@ -83,8 +83,6 @@
 Table Style
 */
 
- 
-
 .table__body::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
@@ -99,7 +97,6 @@ Table Style
 .table__body:hover::-webkit-scrollbar-thumb {
   visibility: visible;
 }
- 
 
 td img {
   width: 40px;
@@ -109,7 +106,7 @@ td img {
 
   vertical-align: middle;
 }
- 
+
 table,
 th,
 td {
@@ -129,16 +126,15 @@ thead th {
   top: 0; 
   left: 0; */
   background-color: #d5d1defe;
-  
+
   cursor: pointer;
   text-transform: capitalize;
 }
-table{
+table {
   width: 100%;
 }
 
 .fooditems-bottom {
- 
   margin-bottom: 10px;
   margin-top: 40px;
   width: calc(100%-100px);
@@ -151,7 +147,7 @@ table{
   border-radius: 0.8rem;
   /* overflow: scroll; */
 }
- 
+
 .fooditems-actions {
   width: 50%;
   font-size: 20px;
@@ -160,7 +156,7 @@ table{
   /* margin: 0 10px; */
   padding: 0 5px;
   gap: 10px;
-} 
+}
 
 .fooditems-actions span:nth-child(1) {
   padding: 5px 10px;
@@ -183,8 +179,8 @@ table{
 }
 
 .pagination {
-  display: flex; 
-  width: fit-content; 
+  display: flex;
+  width: fit-content;
   margin-left: 50px;
   margin-bottom: 50px;
   border: 0.5px solid #a8a8a8;
@@ -199,14 +195,21 @@ table{
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  list-style: none; 
+  list-style: none;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
 }
 
-
-.pagination>li:hover{ 
+.pagination > li:hover {
   background-color: #2f4cdd;
-  color:#fff
+  color: #fff;
 }
 
- 
+a {
+  text-decoration: none;
+  color: grey;
+}
+
+a > li{
+  list-style: none;
+  font-size: 20px;
+}

@@ -20,7 +20,7 @@ const addCategory = async (req, res) => {
     res.status(200).send(category)
 
 }
-
+ 
 // 2. Get All Category
 
 const getAllCategory = async (req, res) => {
@@ -60,9 +60,13 @@ const deleteCategory = async (req, res) => {
 
 }
 
+
+//5. getDishesByCategory
+ 
+
 module.exports = {
     addCategory,
     getAllCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory, 
 }

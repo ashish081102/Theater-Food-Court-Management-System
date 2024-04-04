@@ -1,7 +1,7 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const User = db.user;
+const User = db.user; 
 
 //1. Foprgot Passowrd
 

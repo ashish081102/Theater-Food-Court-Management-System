@@ -1,36 +1,38 @@
 // import controllers review, products
-const categoryController = require("../controllers/categoryController.js");
-const dishesController = require("../controllers/dishesController.js");
-const adminController = require("../controllers/loginController.js");
-const orderController = require("../controllers/orderController.js");
-const orderMasterController = require("../controllers/orderMasterController.js");
-const userController = require("../controllers/userRegistration.js");
-const userCartController = require("../controllers/userCart.js");
-const userWishlistController = require("../controllers/wishlistController.js");
+
+const categoryController = require('../controllers/categoryController.js')
+const dishesController = require('../controllers/dishesController.js')
+const adminController = require('../controllers/loginController.js')
+const orderController = require('../controllers/orderController.js')
+const orderMasterController = require('../controllers/orderMasterController.js')
+const userController = require('../controllers/userRegistration.js')
+const userCartController = require('../controllers/userCart.js')
+const userWishlistController = require('../controllers/wishlistController.js')
+const payemntController = require('../controllers/paymentController');
+const ticketController = require('../controllers/ticketController.js')
 
 const userPasswordRecovery = require("../controllers/userPasswordRecovery.js");
 
 // router
 
-const router = require('express').Router();
+const router = require("express").Router();
 
 //login
 
-router.post('/adminlogin', adminController.adminLogin);
+router.post("/adminlogin", adminController.adminLogin);
 
-router.get('/checkAdmin', adminController.checkUser);
-  
+router.post("/checkAdmin", adminController.checkAdminLogin);
 
 // Dishes routers
-router.post('/addDish', dishesController.upload, dishesController.addDish);
+router.post("/addDish", dishesController.upload, dishesController.addDish);
 
-router.get('/allDishes', dishesController.getAllDishes);
+router.get("/allDishes", dishesController.getAllDishes);
 
-router.get('/Dishes/:id', dishesController.getOneDish);
+router.get("/Dishes/:id", dishesController.getOneDish);
 
-router.put('/Dishes/:id', dishesController.updateDishes);
+router.put("/Dishes/:id", dishesController.updateDishes);
 
-router.delete('/Dishes/:id', dishesController.deleteDish);
+router.delete("/Dishes/:id", dishesController.deleteDish);
 
 router.put("/Dishes/:id", dishesController.updateDishes);
 
@@ -38,28 +40,36 @@ router.delete("/Dishes/:id", dishesController.deleteDish);
 
 // Category Url and Controller
 
-router.get('/getAllCategory', categoryController.getAllCategory);
+router.get("/getAllCategory", categoryController.getAllCategory);
 
-router.post('/addCategory', categoryController.addCategory);
 
-router.put('/updateCategory/:category_id', categoryController.updateCategory);
+router.post("/addCategory", categoryController.addCategory);
 
-router.delete('/deleteCategory/:category_id', categoryController.deleteCategory);
+router.put("/updateCategory/:category_id", categoryController.updateCategory);
+
+router.delete(
+  "/deleteCategory/:category_id",
+  categoryController.deleteCategory
+);
 
 // get dishes by category
-router.get('/getDishesByCategory/:category_id', dishesController.getDishesByCategory);
+router.get(
+  "/getDishesByCategory/:category_id",
+  dishesController.getDishesByCategory
+);
 
 // Order Master Route
 
 router.post("/addOrderMaster", orderMasterController.addOrderMaster);
+router.get("/getOrderMaster",orderMasterController.getOrderMaster)
 
 // Order Route
 
-router.get('/getAllOrder', orderController.getAllOrder);
+router.get("/getAllOrder", orderController.getAllOrder);
 
-router.post('/addOrder', orderController.addOrder);
+router.post("/addOrder", orderController.addOrder);
 
-router.post('/getSpecificDatesOrder', orderController.getSpecificDatesOrder);
+router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
 router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
@@ -67,9 +77,11 @@ router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
 router.post("/userSignUp", userController.addUser);
 router.post("/userSignIn", userController.userLogin);
+router.post("/checkUser", userController.checkUserLogin);
 
 // User cart
 
+router.post("/add", userCartController.addCart);
 router.get("/getCartDetails/:user_id", userCartController.getAllUserCartItem);
 
 router.get("/addCartData", userCartController.getAllUserCartItem);
@@ -93,15 +105,25 @@ router.delete(
 );
 
 
-router.post("/checkUser", userController.checkUserLogin);
-
-
-//user password recovery
+//user password recovery 
 
 router.post("/forgot-password", userPasswordRecovery.forgotPassword);
 
 router.get("/reset-password/:id/:token", userPasswordRecovery.resetPassword);
-router.post("/reset-password/:id/:token", userPasswordRecovery.resetPasswordPost);
+router.post(
+  "/reset-password/:id/:token",
+  userPasswordRecovery.resetPasswordPost
+);
+
+// ticket info
+router.post('/checkUserTicket', ticketController.checkUserTicket)
+// Payment routes
+
+router.post('/checkout', payemntController.checkout)
+
+router.post('/paymentVerify', payemntController.paymentVerification)
+
+router.get('/getKey', payemntController.getKeyRazor)
 
 
 module.exports = router;

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
-import { AiTwotoneDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import AddCategoryModal from "../../Components/AddCategory/AddCategoryModal";
-import EditCategoryModal from "../../Components/AddCategory/EditCategoryModal";
-// import Data from "../../Data/FoodData.json";
+import { IoIosSearch } from "react-icons/io";  
 import Pagination from "../../Components/Pagination/Pagination";
 import axios from "axios";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
 import { useNavigate } from "react-router-dom";
 import NoProductFound from "../../Components/NoProductFound ";
 
-const OrderDetails = () => {
-  const [orderData, setOrderData] = useState([]);
+const PaymentDetails = () => {
+  const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(7);
@@ -29,10 +24,10 @@ const OrderDetails = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/admin/getAllOrder")
+      .get("http://localhost:8080/api/admin/getOrderMaster")
       .then((response) => {
-        setOrderData(response.data);
-        setFilterData(response.data)
+        setTransactions(response.data);
+        setFilterData(response.data);
         console.log(response.data);
       })
       .catch((err) => {
@@ -60,7 +55,6 @@ const OrderDetails = () => {
       <ShimmerTable row={7} col={6} />
     </div>
   ) : (
-  
     <div className="fooditems">
       <div className="fooditems-top">
         <div className="fooditems-top-left">
@@ -75,8 +69,8 @@ const OrderDetails = () => {
             onChange={(event) => {
               setSearchText(event.target.value);
               setFilterData(
-                orderData.filter((data) =>
-                  data.dish_name
+                transactions.filter((data) =>
+                  data.user_name
                     .toLowerCase()
                     .includes(event.target.value.toLowerCase())
                 )
@@ -91,30 +85,26 @@ const OrderDetails = () => {
       </div>
 
       {filterData.length <= 0 ? (
-        <NoProductFound title="Category" description={"category"} />
+        <NoProductFound title="Transaction" description={"transaction"} />
       ) : (
         <>
           <div className="fooditems-bottom table">
             <table>
               <thead>
                 <tr>
-                  <th>Order Id</th>
-                  <th>Dish   Name</th> 
-                  <th>Order Price</th>
-                  <th>Order Date</th>
+                  <th>Transaction Id</th>
+                  <th>User Name</th>
+                  <th>Order Price</th> 
                 </tr>
               </thead>
               <tbody>
                 {currentData &&
                   currentData.map((item) => {
                     return (
-                      <tr key={item.order_id}>
-                        <td>{item.order_id}</td>
-                        <td>{item.dish_name}</td> 
-                        <td>{parseInt(item.order_price).toFixed(2)}</td>
-                        <td>{item.order_date}</td>
-
-                      
+                      <tr key={item.ordermaster_id}>
+                        <td>{item.ordermaster_id}</td>
+                        <td>{item.user_name}</td>
+                        <td>{parseInt(item.total_price).toFixed(2)}</td> 
                       </tr>
                     );
                   })}
@@ -133,4 +123,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default PaymentDetails;

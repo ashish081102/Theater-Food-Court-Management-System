@@ -4,8 +4,8 @@ const WishListTable = () => {
   const [wishlistItem, setWishList] = useState([]);
   useEffect(() => {
     async function getWishlistDetail() {
-      const user_id = 69;
-      await axios
+const user_id = JSON.parse(localStorage.getItem("user_id")); 
+     await axios
         .get("http://localhost:8080/api/admin/getWishlistDetail/" + user_id)
         .then((res) => {
           setWishList(res.data);

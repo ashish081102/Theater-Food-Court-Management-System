@@ -12,6 +12,8 @@ import OrderDetails from "./Pages/OrderDetails/OrderDetails";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./Pages/RootLayout/RootLayout";
 import Report from "./Pages/Report/index";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import PaymentDetails from "./Pages/PaymentDetails/PaymentDetails";
 function App() {
   const [userLogin, setUserLogin] = useState(false);
   const router = createBrowserRouter([
@@ -19,12 +21,14 @@ function App() {
       path: "/",
       element: <RootLayout />,
       id: "root",
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <Home /> },
         { path: "fooditem", element: <FoodItem /> },
         { path: "category", element: <Category /> },
         { path: "order-details", element: <OrderDetails /> },
         { path: "report", element: <Report /> },
+        { path: "payment-details", element: <PaymentDetails /> },
       ],
     },
     {

@@ -9,7 +9,10 @@ import EditCategoryModal from "../../Components/AddCategory/EditCategoryModal";
 import Pagination from "../../Components/Pagination/Pagination";
 import axios from "axios";
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
+import { useNavigate } from "react-router-dom";
+
 import toast from "react-hot-toast";
+import NoProductFound from "../../Components/NoProductFound ";
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -19,12 +22,38 @@ const AddCategory = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [filterData, setFilterData] = useState([]);
   const [editModalData, setEditModalData] = useState("");
-  //getting current page posts
+  //getting current page posts 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentData = filterData.slice(indexOfFirstPost, indexOfLastPost);
 
   const [searchText, setSearchText] = useState("");
+
+  const admin_id = JSON.parse(localStorage.getItem("admin_id"));
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function verifyUser() {
+      console.log("VVVVVVVVVVVVVVVVVERIFYING", admin_id);
+
+      await axios
+        .post("http://localhost:8080/api/admin/checkAdmin", {
+          admin_id: admin_id,
+        })
+        .then((response) => {
+          navigate("/category");
+        })
+        .catch((err) => {
+          navigate("/signIn");
+          console.log(err);
+        });
+    }
+    if (admin_id) {
+      console.log("DDDDDDDDDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOing");
+      verifyUser();
+    } else {
+      navigate("/signIn");
+    }
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -141,7 +170,10 @@ const AddCategory = () => {
         />
       ) : null}
       {filterData.length <= 0 ? (
-        <h1>No Category Found</h1>
+        <NoProductFound
+        title="Category"
+        description={"category"}
+        />
       ) : (
         <>
           <div className="fooditems-bottom table">

@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "../Sidebar-Menu/SidebarData";
 import { IconContext } from "react-icons";
-const Header = ({userLogin}) => {
+import toast from "react-hot-toast";
+const Header = () => {
   const [sidebar, setSidebar] = useState(false);
-
+  const navigate = useNavigate();
   const showSidebar = () => {
     setSidebar(!sidebar);
+  };
+
+  const admin_id = JSON.parse(localStorage.getItem("admin_id"));
+
+  const handleLogout = () => {
+    function deleteCookie(cookieName) {
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
+
+    localStorage.removeItem("admin_id");
+    deleteCookie("Token");
+    toast.success("Logout Successfully!");
+    navigate("/signIn");
   };
   return (
     <>
@@ -43,11 +57,13 @@ const Header = ({userLogin}) => {
                   </li>
                 );
               })}
-              <li className="nav-text" onClick={()=>userLogin(false)}>
-                <Link to="/signIn">
-                  <span>Logout</span>
-                </Link>
-              </li>
+              {admin_id && (
+                <li className="nav-text" onClick={handleLogout}>
+                  <Link to="/signIn">
+                    <span>Logout</span>
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
           {/* SIDE BAR ENDS */}
@@ -61,11 +77,15 @@ const Header = ({userLogin}) => {
 
           <div className="nav-items">
             <ul>
-              <li>POS</li>
-              <li>Transaction</li>
-              <li>Booking</li>
-              <li>Order Status</li>
-              <li>Check Dashboard</li>
+              <Link to={"payment-details"}>
+                <li>Transaction</li>
+              </Link>
+              <Link to={"order-details"}>
+                <li>Order Status</li>
+              </Link>
+              <Link to={"/"}>
+                <li>Check Dashboard</li>
+              </Link>
             </ul>
           </div>
 

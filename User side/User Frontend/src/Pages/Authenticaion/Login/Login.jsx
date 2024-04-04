@@ -43,7 +43,16 @@ const Login = () => {
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      console.log(
+        "==========================",
+        user_id,
+        "============================="
+      );
+      verifyUser();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const userData = {

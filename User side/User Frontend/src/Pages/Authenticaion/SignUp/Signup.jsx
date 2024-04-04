@@ -8,23 +8,30 @@ import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
 
-  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   useEffect(() => {
     async function verifyUser() {
       await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
-
-          navigate('/login');
-        }).catch((err) => {
-          navigate('/sign-up');
+        .post(
+          "http://localhost:8080/api/admin/checkUser",
+          {
+            userid: user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          navigate("/login");
+        })
+        .catch((err) => {
+          navigate("/sign-up");
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      verifyUser();
+    }
   }, []);
   const newUserData = {
     username: "",

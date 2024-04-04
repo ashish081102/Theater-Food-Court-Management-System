@@ -9,7 +9,7 @@ import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
 import { IoSearch } from "react-icons/io5";
 import axios from "axios";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 const Shop = () => {
   const [shopData, setShopData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,54 +23,71 @@ const Shop = () => {
   const [filterData, setFilterData] = useState(shopData);
 
   const currentPosts = filterData.slice(indexOfFirstPost, indexOfLastPost);
-  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   console.log("From local     ", user_id);
   const navigate = useNavigate();
+
+  const params = useParams();
   useEffect(() => {
     async function verifyUser() {
       await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
+        .post(
+          "http://localhost:8080/api/admin/checkUser",
+          {
+            userid: user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
           console.log("Succcseee");
-        }).catch((err) => {
-          navigate('/login');
+        })
+        .catch((err) => {
+          navigate("/login");
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      verifyUser();
+    } else {
+      navigate("/login");
+    }
   }, []);
   useEffect(() => {
-    
     const fetch = async () => {
       setLoading(true);
 
-      setShopData(ShopData);
-
       //API CALL HERE
+      await axios
+        .get(
+          `http://localhost:8080/api/admin/getDishesByCategory/${params.category_id}`
+        )
+        .then((response) => {
+          let data = response.data;
+          const data_array = data.map((d) => {
+            return {
+              id: d.dish_id,
+              image: d.dish_image,
+              title: d.dish_name,
+              description: d.dish_description,
+              rating: d.rating,
+              price: d.dish_price,
+            };
+          });
 
-      // const response = await axios.get(
-      //   "../../data/FoodList.json"
-      // );
-      // console.log("First time load", response.data);
-      // const data = response.data;
+          setShopData(data_array);
+          setFilterData(data_array);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
-      // merging food with its correspondoing category name
-
-      // const mergedData = data.map((item) => {
-      //   return { ...item, category: item.category.category_name };
-      // });
-      // console.log("Merged ", mergedData);
-      // setFoodData(mergedData);
-
-      setFilterData(ShopData);
       setLoading(false);
     };
 
     fetch();
-  }, []);
+  }, [params]);
 
   const searchFilter = () => {
     setFilterData(
@@ -102,7 +119,6 @@ const Shop = () => {
     </div>
   ) : (
     <div className="shop">
-      <Header />
       <Banner title="Shop Page" path="Shop" />
 
       <div className="shop__container">
@@ -126,8 +142,8 @@ const Shop = () => {
         <div className="shop__container--data">
           {currentPosts.map((data, index) => {
             return (
-              <Link to={`/product/${data.id}`}>
-                <SingleProduct key={index} itemInfo={data} />
+              <Link key={index} to={`/product/${data.id}`}>
+                <SingleProduct  itemInfo={data} />
               </Link>
             );
           })}

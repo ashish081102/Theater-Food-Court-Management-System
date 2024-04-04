@@ -25,7 +25,11 @@ const WishList = () => {
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      verifyUser();
+    } else {
+      navigate("/login");
+    }
   }, []);
   return (
     <>

@@ -12,6 +12,8 @@ import EditFoodItemModel from "../../Components/EditFoodItemModal/EditFoodItemMo
 import { ShimmerTable, ShimmerTitle } from "react-shimmer-effects";
 import toast from "react-hot-toast";
 import { getImageURL } from "../../utils/image-util";
+import { useNavigate } from "react-router-dom";
+import NoProductFound from "../../Components/NoProductFound ";
 const FoodItem = () => {
   const [foodData, setFoodData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,10 +32,34 @@ const FoodItem = () => {
 
   const currentPosts = filterData.slice(indexOfFirstPost, indexOfLastPost);
   // const currentPosts = foodData.slice(indexOfFirstPost, indexOfLastPost);
-
   const [toBeDeleted, setToBeDeleted] = useState(null);
 
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
+  const admin_id = JSON.parse(localStorage.getItem("admin_id"));
+  useEffect(() => {
+    async function verifyUser() {
+      console.log("VVVVVVVVVVVVVVVVVERIFYING", admin_id);
+
+      await axios
+        .post("http://localhost:8080/api/admin/checkAdmin", {
+          admin_id: admin_id,
+        })
+        .then((response) => {
+          navigate("/fooditem");
+        })
+        .catch((err) => {
+          navigate("/signIn");
+          console.log(err);
+        });
+    }
+    if (admin_id) {
+      console.log("DDDDDDDDDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOing");
+      verifyUser();
+    } else {
+      navigate("/signIn");
+    }
+  }, []);
 
   useEffect(() => {
     const fetch = async () => {
@@ -123,7 +149,9 @@ const FoodItem = () => {
               setSearchText(event.target.value);
               setFilterData(
                 foodData.filter((data) =>
-                  data.dish_name.toLowerCase().includes(event.target.value)
+                  data.dish_name
+                    .toLowerCase()
+                    .includes(event.target.value.toLowerCase())
                 )
               );
               setCurrentPage(1);
@@ -151,7 +179,7 @@ const FoodItem = () => {
       ) : null}
 
       {filterData.length <= 0 ? (
-        <h1>No Data Found</h1>
+        <NoProductFound title={"Product"} description={"product"} />
       ) : (
         <>
           <div className="fooditems-bottom table">

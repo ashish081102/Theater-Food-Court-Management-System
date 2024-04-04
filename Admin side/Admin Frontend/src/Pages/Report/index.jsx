@@ -43,6 +43,33 @@ const Report = () => {
   //         navigate("/signIn");
   //       });
   //   }, []);
+
+ 
+  const admin_id = JSON.parse(localStorage.getItem("admin_id"));
+  useEffect(() => {
+    async function verifyUser() {
+      console.log("VVVVVVVVVVVVVVVVVERIFYING", admin_id);
+
+      await axios
+        .post("http://localhost:8080/api/admin/checkAdmin", {
+          admin_id: admin_id,
+        })
+        .then((response) => {
+          navigate("/report");
+        })
+        .catch((err) => {
+          navigate("/signIn");
+          console.log(err);
+        });
+    }
+    if (admin_id) {
+      console.log("DDDDDDDDDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOing");
+      verifyUser();
+    } else {
+      navigate("/signIn");
+    }
+  }, []);
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/admin/getAllCategory")

@@ -8,24 +8,34 @@ import "./bootstrap-select.min.css";
 import CartTable from "../../Components/Table/CartTable";
 const Cart = () => {
   const [cartItems, setCartItems] = useState();
-  const user_id = JSON.parse(localStorage.getItem('user_id'));
+  const user_id = JSON.parse(localStorage.getItem("user_id"));
   console.log("From local     ", user_id);
   const navigate = useNavigate();
   useEffect(() => {
     async function verifyUser() {
       await axios
-        .post("http://localhost:8080/api/admin/checkUser", {
-          userid: user_id
-        }, {
-          withCredentials: true,
-        }).then((response) => {
+        .post(
+          "http://localhost:8080/api/admin/checkUser",
+          {
+            userid: user_id,
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
           console.log("Succcseee");
-        }).catch((err) => {
-          navigate('/login');
+        })
+        .catch((err) => {
+          navigate("/login");
           console.log(err);
         });
     }
-    verifyUser();
+    if (user_id) {
+      verifyUser();
+    } else {
+      navigate("/login");
+    }
   }, []);
   useEffect(() => {
     async function getCartDetail() {
@@ -43,7 +53,7 @@ const Cart = () => {
   return (
     <>
       <Banner title={"Cart"} path={"Cart Detail"} />
-      <div className="page-wraper">
+      {/* <div className="page-wraper">
         <div className="page-content">
           <div className="content-inner">
             <div className="container">
@@ -250,6 +260,15 @@ const Cart = () => {
         >
           <i className="fas fa-arrow-up"></i>
         </button>
+      </div> */}
+      <div className="page-wraper">
+        <div className="page-content">
+          <div className="content-inner">
+            <div className="container">
+              <CartTable />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
