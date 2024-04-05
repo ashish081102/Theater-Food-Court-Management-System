@@ -12,7 +12,9 @@ const CartTable = () => {
       const user_id = JSON.parse(localStorage.getItem("user_id"));
 
       await axios
-        .get("http://localhost:8080/api/admin/getCartDetails/" + user_id.user_id)
+        .get(
+          "http://localhost:8080/api/admin/getCartDetails/" + user_id.user_id
+        )
         .then((res) => {
           setCartItems(res.data);
           let totalVal = 0;
@@ -72,7 +74,8 @@ const CartTable = () => {
   }
 
   const paymentHandler = async (data) => {
-    const user_id = 69;
+    const user_id = JSON.parse(localStorage.getItem("user_id"));
+    const id = user_id.user_id;
     const {
       data: { key },
     } = await axios.get("http://localhost:8080/api/admin/getKey");
@@ -86,7 +89,7 @@ const CartTable = () => {
       image:
         "https://cdn4.vectorstock.com/i/1000x1000/88/28/cinema-popcorn-box-concept-background-realistic-vector-21398828.jpg",
       order_id: data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: `http://localhost:8080/api/admin/paymentVerify/?user_id=${user_id}&total=${totalPrice}`,
+      callback_url: `http://localhost:8080/api/admin/paymentVerify?user_id=${id}&total=${totalPrice}`,
       prefill: {
         name: "Ashish Wadhwani",
         email: "ashishwadhani@gmail.com",
@@ -117,13 +120,14 @@ const CartTable = () => {
   };
 
   const checkUserTicket = async (event) => {
+    const user_id = JSON.parse(localStorage.getItem("user_id"));
     event.preventDefault();
     // const user_email = "dscd@gmail.com";
     const userData = {
       user_seat: user_seat.current.value,
       user_screen: user_screen.current.value,
       ticket_no: ticket_no.current.value,
-      user_email: "dscd@gmail.com",
+      user_email: user_id.user_email,
     };
     await axios
       .post("http://localhost:8080/api/admin/checkUserTicket", userData)
@@ -177,7 +181,7 @@ const CartTable = () => {
                 {console.log(totalPrice)}
                 {cartItems.length > 0 &&
                   cartItems[0] != undefined &&
-                  cartItems.map((value,index) => (
+                  cartItems.map((value, index) => (
                     <tr key={index}>
                       <td class="product-item-img">
                         <img src="assets/images/product/pic1.jpg" alt="" />

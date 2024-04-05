@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import SHOP_DATA from "../../data/FoodList.json";
 import Banner from "../../Components/Banner/Banner";
 import { FaCartShopping } from "react-icons/fa6";
+import { FaHeartCirclePlus } from "react-icons/fa6";
 import axios from "axios";
 
 const ProductDetail = () => {
@@ -37,7 +38,9 @@ const ProductDetail = () => {
     }
     const getOneDish = async () => {
       await axios
-        .get(`http://localhost:8080/api/admin/Dishes/${productId}`)
+        .get(`http://localhost:8080/api/admin/Dishes/${productId}`, {
+          withCredentials: true,
+        })
         .then((response) => {
           const d = response.data;
           const data = {
@@ -70,7 +73,9 @@ const ProductDetail = () => {
     console.log("DDDDDDAAAAAAAAAAAAAATTTTTTTTTTTTTAAAAAAAAAAAAAAAAAA", data);
 
     await axios
-      .post("http://localhost:8080/api/admin/add", data)
+      .post("http://localhost:8080/api/admin/add", data, {
+        withCredentials: true,
+      })
       .then((response) => {
         navigate("/cart-detail");
       });
@@ -114,6 +119,22 @@ const ProductDetail = () => {
                 $ {currentData.price}
                 <span>$ {currentData.price * 8 - 12}</span>
               </p>
+
+              <button
+                onClick={() => {
+                  // console.log("Current Data : ", currentData);
+                  // const data = {
+                  //   user_id: user_id.user_id,
+                  //   dish_id: currentData.id,
+                  //   quantity: 1,
+                  // };
+                  // // call the db api to add the details
+                  // addCartDetailsApi(data);
+                }}
+              >
+                Add To Wishlist <FaHeartCirclePlus />
+              </button>
+
               <button
                 onClick={() => {
                   console.log("Current Data : ", currentData);

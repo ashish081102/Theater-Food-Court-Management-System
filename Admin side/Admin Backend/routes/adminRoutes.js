@@ -73,6 +73,8 @@ router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
 router.post("/getSpecificDatesOrder", orderController.getSpecificDatesOrder);
 
+router.get("/getUserOrder/:payment_id",orderController.getUserOrder)
+
 // User signup
 
 router.post("/userSignUp", userController.addUser);

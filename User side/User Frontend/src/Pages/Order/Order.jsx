@@ -1,17 +1,27 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Cart.css";
 import "./animate.css";
 import "./bootstrap-select.min.css";
 import Banner from "../../Components/Banner/Banner";
 const Order = () => {
+  const params = useParams();
+
+  console.log(params);
+
   const [orderList, setOrderList] = useState([]);
   const [orderPrice, setOrderPrice] = useState();
   const [orderId, setOrderId] = useState();
+
   useEffect(() => {
     async function getOrderDetail() {
-const user_id = JSON.parse(localStorage.getItem("user_id"));      await axios
-        .get("http://localhost:8080/api/admin/getUserOrder/" + user_id)
+      await axios
+        .get(
+          "http://localhost:8080/api/admin/getUserOrder/" + params.payment_id,{
+            withCredentials:true
+          }
+        )
         .then((res) => {
           setOrderList(res.data);
           console.log(res.data);
@@ -48,6 +58,7 @@ const user_id = JSON.parse(localStorage.getItem("user_id"));      await axios
                         orderList[0] != undefined &&
                         orderList.map((value) => (
                           <tr>
+                            {console.log(value)}
                             <td class="product-item-img">
                               <img src={value.dish_image} alt="" />
                             </td>

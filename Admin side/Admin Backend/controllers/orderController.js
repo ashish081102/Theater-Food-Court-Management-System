@@ -90,7 +90,7 @@ const getSpecificDatesOrder = async (req, res) => {
     });
 };
 const getUserOrder = async (req, res) => {
-  const user_id = req.params["user_id"];
+  const payment_id = req.params["payment_id"];
   try {
     const currentDate = new Date();
 
@@ -111,7 +111,7 @@ const getUserOrder = async (req, res) => {
             FROM
                 orders
             INNER JOIN dishes ON dishes.dish_id = orders.dish_id AND orders.order_date = '${formattedDate}'
-            INNER JOIN ordersmaster ON orders.ordermaster_id= ordersmaster.ordermaster_id AND ordersmaster.user_id = ${user_id}
+            INNER JOIN ordersmaster ON orders.ordermaster_id= ordersmaster.ordermaster_id AND ordersmaster.ordermaster_id = '${payment_id}'
     `,
       { type: db.sequelize.QueryTypes.SELECT }
     );

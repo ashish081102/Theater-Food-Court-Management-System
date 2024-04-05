@@ -160,6 +160,15 @@ const Signup = () => {
               other purposes described in our <span>privacy policy.</span>
             </p>
 
+            <p>
+              Already have an account?
+              <Link
+              style={{
+                marginLeft:"10px"
+              }}
+              to={"/login"}>Login</Link>
+            </p>
+
             <button className="btn-primary">Register</button>
           </form>
         </div>

@@ -6,7 +6,7 @@ const WishListTable = () => {
     async function getWishlistDetail() {
 const user_id = JSON.parse(localStorage.getItem("user_id")); 
      await axios
-        .get("http://localhost:8080/api/admin/getWishlistDetail/" + user_id)
+        .get("http://localhost:8080/api/admin/getWishlistDetail/" + user_id.user_id)
         .then((res) => {
           setWishList(res.data);
           console.log(res.data);

@@ -23,6 +23,7 @@ const Header = () => {
     localStorage.removeItem("admin_id");
     deleteCookie("Token");
     toast.success("Logout Successfully!");
+
     navigate("/signIn");
   };
   return (

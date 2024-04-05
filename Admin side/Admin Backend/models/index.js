@@ -41,7 +41,7 @@ db.orderMaster = require('./orderMasterModel')(sequelize, DataTypes)
 db.order = require('./orderModel')(sequelize, DataTypes)
 db.cart = require('./cartModel.js')(sequelize, DataTypes)
 db.wishlist = require('./wishlistModel.js')(sequelize, DataTypes)
-
+db.ticket = require('./ticketModel.js')(sequelize, DataTypes)
 db.sequelize.sync({ force: false })
     .then(() => {
         console.log('yes re-sync done!')
